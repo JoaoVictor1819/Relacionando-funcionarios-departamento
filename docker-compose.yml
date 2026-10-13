@@ -1,0 +1,10 @@
+services:
+  mysql:
+      image: 'mysql'
+      environment:
+        - 'MYSQL_DATABASE=empresacompany'
+        - 'MYSQL_PASSWORD=senha123'
+        - 'MYSQL_ROOT_PASSWORD=senha123'
+        - 'MYSQL_USER=mysqluser'
+      ports:
+        - '5000:3306'
