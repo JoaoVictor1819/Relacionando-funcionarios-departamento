@@ -1,6 +1,7 @@
 package empresa.spring.jpa.entity.funcionarios;
 
 
+import empresa.spring.jpa.dto.funcionariosDto.FuncionariosResponseDto;
 import empresa.spring.jpa.entity.departamento.DepartamentoEntity;
 import jakarta.persistence.*;
 import lombok.*;
@@ -27,4 +28,6 @@ public class FuncionarioEntity {
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "departamento_id")
     public DepartamentoEntity departamento;
+
+
 }
