@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import java.util.Date;
 
 @RestControllerAdvice
-public class RestGlobalHandler {
+public class RestGlobalExceptionHandler {
 
     @ExceptionHandler(ResouceExceptionHandler.class)
     public ResponseEntity<RestErroMenssage> resouceExceptionHandler(ResouceExceptionHandler ex){
