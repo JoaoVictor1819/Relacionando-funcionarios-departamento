@@ -6,13 +6,17 @@ import empresa.spring.jpa.exception.ResouceExceptionHandler;
 import empresa.spring.jpa.exception.RestErroMenssage;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 @RestControllerAdvice
-public class RestGlobalExceptionHandler {
+public class RestGlobalExceptionHandler{
 
     @ExceptionHandler(ResouceExceptionHandler.class)
     public ResponseEntity<RestErroMenssage> resouceExceptionHandler(ResouceExceptionHandler ex){
@@ -43,4 +47,14 @@ public class RestGlobalExceptionHandler {
                 .build();
         return ResponseEntity.status(HttpStatus.NO_CONTENT).body(erroMenssage);
     }
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<Map<String, String>> methodArgumentNotValid(MethodArgumentNotValidException ex){
+        Map<String, String> errors = new HashMap<>();
+        ex.getBindingResult().getFieldErrors().forEach(error ->
+            errors.put(error.getField(), error.getDefaultMessage())
+        );
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errors);
+    }
+
 }

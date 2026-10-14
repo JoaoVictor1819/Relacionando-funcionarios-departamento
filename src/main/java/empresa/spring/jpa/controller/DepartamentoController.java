@@ -3,6 +3,7 @@ package empresa.spring.jpa.controller;
 import empresa.spring.jpa.dto.departamentoDto.DepartamentoRequestDto;
 import empresa.spring.jpa.dto.departamentoDto.DepartamentoResponseDto;
 import empresa.spring.jpa.service.DepartamentoSevice;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +20,7 @@ public class DepartamentoController {
 
 
     @PostMapping
-    public ResponseEntity saveDepartamento(@RequestBody DepartamentoRequestDto dto){
+    public ResponseEntity saveDepartamento(@Valid  @RequestBody DepartamentoRequestDto dto){
         departamentoSevice.save(dto);
         return ResponseEntity.status(HttpStatus.CREATED).body("Departamento criado com sucesso");
     }

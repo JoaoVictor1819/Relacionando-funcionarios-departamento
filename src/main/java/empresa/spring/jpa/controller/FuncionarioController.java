@@ -4,6 +4,7 @@ import empresa.spring.jpa.dto.funcionariosDto.FuncionariosRequestDto;
 import empresa.spring.jpa.dto.funcionariosDto.FuncionariosResponseDto;
 import empresa.spring.jpa.entity.funcionarios.FuncionarioEntity;
 import empresa.spring.jpa.service.FuncionariosService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +21,7 @@ public class FuncionarioController {
 
 
     @PostMapping
-    public ResponseEntity saveFuncionario(@RequestBody FuncionariosRequestDto funcionario){
+    public ResponseEntity saveFuncionario(@Valid @RequestBody FuncionariosRequestDto funcionario){
         funcionariosService.saveFuncionario(funcionario);
         return ResponseEntity.status(HttpStatus.OK).body("Funcionario criado com sucesso");
     }
