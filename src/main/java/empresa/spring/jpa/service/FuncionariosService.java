@@ -27,6 +27,8 @@ public class FuncionariosService {
 
         FuncionarioEntity funcionario = new FuncionarioEntity();
         funcionario.setNome(dto.nome);
+        funcionario.setEmail(dto.email);
+        funcionario.setSenha(dto.senha);
         funcionario.setDepartamento(departamento);
 
         return funcionariosRepository.save(funcionario);
@@ -41,13 +43,13 @@ public class FuncionariosService {
                 .toList();
     }
 
-    private FuncionariosResponseDto toResponse(FuncionarioEntity funcionario){
-        return new FuncionariosResponseDto(funcionario.getId(), funcionario.getNome(), funcionario.getDepartamento().getId(), funcionario.getDepartamento().getNome());
+    private FuncionariosResponseDto toResponse(FuncionarioEntity f){
+        return new FuncionariosResponseDto(f.getId(), f.getDataCriacao(), f.getNome(), f.getEmail(), f.getDepartamento().getId(), f.getDepartamento().getNome());
     }
-
 
 
     public void delete(Long id){
         funcionariosRepository.deleteById(id);
     }
+
 }

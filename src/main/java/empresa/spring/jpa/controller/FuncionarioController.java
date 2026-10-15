@@ -27,7 +27,6 @@ public class FuncionarioController {
     }
 
 
-
     @GetMapping
     public ResponseEntity<List<FuncionariosResponseDto>> findAllFuncionarios() {
         var funcionarios = funcionariosService.findAll();

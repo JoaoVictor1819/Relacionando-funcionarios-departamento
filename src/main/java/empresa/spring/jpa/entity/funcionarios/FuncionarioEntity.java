@@ -6,6 +6,8 @@ import empresa.spring.jpa.entity.departamento.DepartamentoEntity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -23,7 +25,18 @@ public class FuncionarioEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long id;
 
+    @Column(name = "Data_Criacao_Funcionario")
+    public Date dataCriacao = new Date();
+
+    @Column(name = "Nome_Funcionario")
     public String nome;
+
+    @Column(name = "Email_Funcionario", unique = true)
+    public String email;
+
+    @Column(name = "Senha_Funcionario")
+    public String senha;
+
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "departamento_id")

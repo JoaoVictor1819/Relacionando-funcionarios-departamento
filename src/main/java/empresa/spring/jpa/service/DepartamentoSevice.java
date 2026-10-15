@@ -35,6 +35,8 @@ public class DepartamentoSevice {
 
          departamentoRepository.save(DepartamentoEntity.builder()
                  .nome(dto.getNome())
+                 .salarioFixo(dto.getSalarioFixo())
+                 .descricao(dto.getDescricao())
                  .build());
     }
 
@@ -48,10 +50,19 @@ public class DepartamentoSevice {
 
     private DepartamentoResponseDto toResponse(DepartamentoEntity departamentoEntity){
        List<FuncionariosResponseDto> funcionarios = departamentoEntity.getFuncionarios().stream()
-               .map(f -> new FuncionariosResponseDto(f.getId(), f.getNome(),f.getDepartamento().getId(), f.getDepartamento().getNome()))
+               .map(f -> new FuncionariosResponseDto(f.getId(),
+                       f.getDataCriacao(),
+                       f.getNome(),
+                       f.getEmail(),
+                       f.getDepartamento().getId(),
+                       f.getDepartamento().getNome()))
                .toList();
 
-       return new DepartamentoResponseDto(departamentoEntity.getId(), departamentoEntity.getNome(), funcionarios);
+       return new DepartamentoResponseDto(departamentoEntity.getId(),
+               departamentoEntity.getNome(),
+               departamentoEntity.getSalarioFixo(),
+               departamentoEntity.getDescricao(),
+               funcionarios);
     }
 
     public List<DepartamentoResponseDto> findByName(String name){
@@ -71,10 +82,14 @@ public class DepartamentoSevice {
                 .orElseThrow(() -> new BadRequestExceptionHandler("Departamento não encontrado"));
 
         List<FuncionariosResponseDto> funcionariosResponseDto = departamento.getFuncionarios().stream()
-                .map(f -> new FuncionariosResponseDto(f.getId(), f.getNome(),f.getDepartamento().getId(), f.getDepartamento().getNome()))
+                .map(f -> new FuncionariosResponseDto(f.getId(),f.getDataCriacao(),f.getNome(),f.getEmail(),f.getDepartamento().getId(), f.getDepartamento().getNome()))
                 .toList();
 
-        return new DepartamentoResponseDto(departamento.getId(), departamento.getNome(), funcionariosResponseDto);
+        return new DepartamentoResponseDto(departamento.getId(),
+                departamento.getNome(),
+                departamento.getSalarioFixo(),
+                departamento.getDescricao(),
+                funcionariosResponseDto);
 
     }
 
