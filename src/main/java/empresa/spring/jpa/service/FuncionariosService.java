@@ -4,6 +4,7 @@ import empresa.spring.jpa.dto.funcionariosDto.FuncionariosRequestDto;
 import empresa.spring.jpa.dto.funcionariosDto.FuncionariosResponseDto;
 import empresa.spring.jpa.entity.departamento.DepartamentoEntity;
 import empresa.spring.jpa.entity.funcionarios.FuncionarioEntity;
+import empresa.spring.jpa.exception.BadRequestExceptionHandler;
 import empresa.spring.jpa.exception.ResouceExceptionHandler;
 import empresa.spring.jpa.repository.DepartamentoRepository;
 import empresa.spring.jpa.repository.FuncionariosRepository;
@@ -22,7 +23,7 @@ public class FuncionariosService {
 
     @Transactional
     public FuncionarioEntity saveFuncionario(FuncionariosRequestDto dto){
-        DepartamentoEntity departamento = departamentoRepository.findById(dto.idDepartamento)
+        DepartamentoEntity departamento = departamentoRepository.findById(dto.getIdDepartamento())
                 .orElseThrow(() -> new ResouceExceptionHandler("Departamento não encontrado"));
 
         FuncionarioEntity funcionario = new FuncionarioEntity();
@@ -52,4 +53,21 @@ public class FuncionariosService {
         funcionariosRepository.deleteById(id);
     }
 
+    @Transactional
+    public FuncionariosResponseDto update(Long id, FuncionariosRequestDto dto) {
+        FuncionarioEntity funcionario = funcionariosRepository.findById(id)
+                .orElseThrow(() -> new BadRequestExceptionHandler("Este id de funcionario nao existe"));
+
+        DepartamentoEntity departamento = departamentoRepository.findById(dto.getIdDepartamento())
+                        .orElseThrow(() -> new BadRequestExceptionHandler("Este departemento nao existe"));
+
+        funcionario.setNome(dto.getNome());
+        funcionario.setEmail(dto.getEmail());
+        funcionario.setSenha(dto.getSenha());
+        funcionario.setDepartamento(departamento);
+
+        FuncionarioEntity funcionarioUpdate = funcionariosRepository.save(funcionario);
+        return toResponse(funcionarioUpdate);
+
+    }
 }

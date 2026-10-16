@@ -33,6 +33,12 @@ public class FuncionarioController {
         return  ResponseEntity.status(HttpStatus.OK).body(funcionarios);
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<FuncionariosResponseDto> updateFuncionario(@PathVariable Long id, @Valid @RequestBody FuncionariosRequestDto dto){
+        FuncionariosResponseDto funcionario = funcionariosService.update(id, dto);
+        return ResponseEntity.status(HttpStatus.OK).body(funcionario);
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity deleteFuncionario(@PathVariable Long id){
         funcionariosService.delete(id);

@@ -1,6 +1,8 @@
 package empresa.spring.jpa.entity.funcionarios;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import empresa.spring.jpa.dto.funcionariosDto.FuncionariosResponseDto;
 import empresa.spring.jpa.entity.departamento.DepartamentoEntity;
 import jakarta.persistence.*;
