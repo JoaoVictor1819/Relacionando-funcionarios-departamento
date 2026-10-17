@@ -1,11 +1,13 @@
 package empresa.spring.jpa.dto.funcionariosDto;
 
 
-import empresa.spring.jpa.entity.departamento.DepartamentoEntity;
+import empresa.spring.jpa.dto.enderecoDto.EnderecoResponseDto;
+import empresa.spring.jpa.entity.endereco.EnderecoEntity;
 import empresa.spring.jpa.entity.funcionarios.FuncionarioEntity;
 import lombok.*;
 
 import java.util.Date;
+import java.util.Optional;
 
 @Getter
 @Setter
@@ -27,6 +29,8 @@ public class FuncionariosResponseDto {
 
     public String nomeDepartamento;
 
+    public EnderecoEntity endereco;
+
     public FuncionariosResponseDto(FuncionarioEntity f) {
         this.id = f.getId();
         this.dataCriacao = f.getDataCriacao();
@@ -34,5 +38,6 @@ public class FuncionariosResponseDto {
         this.email = f.getEmail();
         this.idDepartamento = f.getDepartamento().getId();
         this.nomeDepartamento = f.getDepartamento().getNome();
+        this.endereco = f.getEndereco();
     }
 }

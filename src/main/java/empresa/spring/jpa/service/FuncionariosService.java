@@ -7,6 +7,7 @@ import empresa.spring.jpa.entity.funcionarios.FuncionarioEntity;
 import empresa.spring.jpa.exception.BadRequestExceptionHandler;
 import empresa.spring.jpa.exception.ResouceExceptionHandler;
 import empresa.spring.jpa.repository.DepartamentoRepository;
+import empresa.spring.jpa.repository.EnderecoRepository;
 import empresa.spring.jpa.repository.FuncionariosRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -20,6 +21,7 @@ public class FuncionariosService {
 
     private final FuncionariosRepository funcionariosRepository;
     private  final DepartamentoRepository departamentoRepository;
+    private final EnderecoRepository enderecoRepository;
 
     @Transactional
     public FuncionarioEntity saveFuncionario(FuncionariosRequestDto dto){
@@ -45,7 +47,7 @@ public class FuncionariosService {
     }
 
     private FuncionariosResponseDto toResponse(FuncionarioEntity f){
-        return new FuncionariosResponseDto(f.getId(), f.getDataCriacao(), f.getNome(), f.getEmail(), f.getDepartamento().getId(), f.getDepartamento().getNome());
+        return new FuncionariosResponseDto(f.getId(), f.getDataCriacao(), f.getNome(), f.getEmail(), f.getDepartamento().getId(), f.getDepartamento().getNome(), f.getEndereco());
     }
 
 

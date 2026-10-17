@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import empresa.spring.jpa.dto.funcionariosDto.FuncionariosResponseDto;
 import empresa.spring.jpa.entity.departamento.DepartamentoEntity;
+import empresa.spring.jpa.entity.endereco.EnderecoEntity;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -39,6 +40,10 @@ public class FuncionarioEntity {
     @Column(name = "Senha_Funcionario")
     public String senha;
 
+
+    @OneToOne(cascade =  CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "endereco_id")
+    public EnderecoEntity endereco;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "departamento_id")
