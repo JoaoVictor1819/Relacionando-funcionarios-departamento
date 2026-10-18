@@ -7,7 +7,6 @@ import empresa.spring.jpa.service.EnderecoService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,6 +30,12 @@ public class EnderecoController {
     @GetMapping
     public ResponseEntity<List<EnderecoResponseDto>> findAllEndereco(){
         List<EnderecoResponseDto> enderecoResponseDto = enderecoService.findAllEndereco();
+        return ResponseEntity.status(HttpStatus.OK).body(enderecoResponseDto);
+    }
+
+    @GetMapping("/search/estado")
+    public ResponseEntity<List<EnderecoResponseDto>> findByEstado(@RequestParam String estado){
+        List<EnderecoResponseDto> enderecoResponseDto = enderecoService.findByEstado(estado);
         return ResponseEntity.status(HttpStatus.OK).body(enderecoResponseDto);
     }
 }

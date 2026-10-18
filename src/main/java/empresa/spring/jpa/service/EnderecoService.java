@@ -3,9 +3,11 @@ package empresa.spring.jpa.service;
 
 import empresa.spring.jpa.dto.enderecoDto.EnderecoRequestDto;
 import empresa.spring.jpa.dto.enderecoDto.EnderecoResponseDto;
+import empresa.spring.jpa.dto.funcionariosDto.FuncionariosResponseDto;
 import empresa.spring.jpa.entity.endereco.EnderecoEntity;
 import empresa.spring.jpa.entity.funcionarios.FuncionarioEntity;
 import empresa.spring.jpa.exception.BadRequestExceptionHandler;
+import empresa.spring.jpa.exception.ResouceExceptionHandler;
 import empresa.spring.jpa.repository.EnderecoRepository;
 import empresa.spring.jpa.repository.FuncionariosRepository;
 import lombok.RequiredArgsConstructor;
@@ -49,7 +51,19 @@ public class EnderecoService {
     }
 
     private EnderecoResponseDto toResponse(EnderecoEntity e){
-        return new EnderecoResponseDto(e.getId(), e.getCidade());
+        return new EnderecoResponseDto(e.getId(),e.getCep(),e.getEstado() ,e.getCidade(), e.getRua(), e.getNumeroCasa());
+    }
+
+    public List<EnderecoResponseDto> findByEstado(String estado){
+        List<EnderecoEntity> endereco = enderecoRepository.FindByEstado(estado);
+
+        if (endereco.isEmpty()){
+            throw new ResouceExceptionHandler("Nao existe nenhum endereco cadastro nesse estado");
+        }
+
+        return endereco.stream()
+                .map(this::toResponse)
+                .toList();
     }
 
 }
