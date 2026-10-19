@@ -2,13 +2,16 @@ package empresa.spring.jpa.service;
 
 import empresa.spring.jpa.dto.funcionariosDto.FuncionariosRequestDto;
 import empresa.spring.jpa.dto.funcionariosDto.FuncionariosResponseDto;
+import empresa.spring.jpa.dto.projetoDto.ProjetoResponseDto;
 import empresa.spring.jpa.entity.departamento.DepartamentoEntity;
 import empresa.spring.jpa.entity.funcionarios.FuncionarioEntity;
+import empresa.spring.jpa.entity.projetos.ProjetoEntity;
 import empresa.spring.jpa.exception.BadRequestExceptionHandler;
 import empresa.spring.jpa.exception.ResouceExceptionHandler;
 import empresa.spring.jpa.repository.DepartamentoRepository;
 import empresa.spring.jpa.repository.EnderecoRepository;
 import empresa.spring.jpa.repository.FuncionariosRepository;
+import empresa.spring.jpa.repository.ProjetoRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -22,17 +25,25 @@ public class FuncionariosService {
     private final FuncionariosRepository funcionariosRepository;
     private  final DepartamentoRepository departamentoRepository;
     private final EnderecoRepository enderecoRepository;
+    private final ProjetoRepository projetoRepository;
 
     @Transactional
     public FuncionarioEntity saveFuncionario(FuncionariosRequestDto dto){
         DepartamentoEntity departamento = departamentoRepository.findById(dto.getIdDepartamento())
                 .orElseThrow(() -> new ResouceExceptionHandler("Departamento não encontrado"));
 
+        List<ProjetoEntity> projetoEntities = projetoRepository.findAllById(dto.idProjeto);
+
+        if (projetoEntities.isEmpty() || projetoEntities == null){
+            throw new ResouceExceptionHandler("Nao existe nenhum projeto com este id");
+        }
+
         FuncionarioEntity funcionario = new FuncionarioEntity();
         funcionario.setNome(dto.nome);
         funcionario.setEmail(dto.email);
         funcionario.setSenha(dto.senha);
         funcionario.setDepartamento(departamento);
+        funcionario.getProjetos().addAll(projetoEntities);
 
         return funcionariosRepository.save(funcionario);
     }
@@ -47,7 +58,10 @@ public class FuncionariosService {
     }
 
     private FuncionariosResponseDto toResponse(FuncionarioEntity f){
-        return new FuncionariosResponseDto(f.getId(), f.getDataCriacao(), f.getNome(), f.getEmail(), f.getDepartamento().getId(), f.getDepartamento().getNome(), f.getEndereco());
+        List<ProjetoResponseDto> projetoResponseDtos = f.getProjetos().stream()
+                .map(projeto -> new ProjetoResponseDto(projeto.getId(), projeto.getNome() ))
+                .toList();
+        return new FuncionariosResponseDto(f.getId(), f.getDataCriacao(), f.getNome(), f.getEmail(), f.getDepartamento().getId(), f.getDepartamento().getNome(), f.getEndereco(), projetoResponseDtos);
     }
 
 

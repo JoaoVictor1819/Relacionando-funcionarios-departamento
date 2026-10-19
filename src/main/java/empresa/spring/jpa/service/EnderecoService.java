@@ -3,7 +3,6 @@ package empresa.spring.jpa.service;
 
 import empresa.spring.jpa.dto.enderecoDto.EnderecoRequestDto;
 import empresa.spring.jpa.dto.enderecoDto.EnderecoResponseDto;
-import empresa.spring.jpa.dto.funcionariosDto.FuncionariosResponseDto;
 import empresa.spring.jpa.entity.endereco.EnderecoEntity;
 import empresa.spring.jpa.entity.funcionarios.FuncionarioEntity;
 import empresa.spring.jpa.exception.BadRequestExceptionHandler;
@@ -55,7 +54,7 @@ public class EnderecoService {
     }
 
     public List<EnderecoResponseDto> findByEstado(String estado){
-        List<EnderecoEntity> endereco = enderecoRepository.FindByEstado(estado);
+        List<EnderecoEntity> endereco = enderecoRepository.findByEstadoContainingIgnoreCase(estado);
 
         if (endereco.isEmpty()){
             throw new ResouceExceptionHandler("Nao existe nenhum endereco cadastro nesse estado");

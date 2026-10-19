@@ -1,12 +1,14 @@
 package empresa.spring.jpa.dto.funcionariosDto;
 
 import empresa.spring.jpa.entity.departamento.DepartamentoEntity;
+import empresa.spring.jpa.entity.projetos.ProjetoEntity;
 import jakarta.persistence.Column;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
+import java.util.List;
 import java.util.function.LongFunction;
 
 @Getter
@@ -31,6 +33,7 @@ public class FuncionariosRequestDto {
     @NotNull(message = "Escolha o departamento que voce fara parte!")
     public Long idDepartamento;
 
+    public List<Long> idProjeto;
 
 
 }

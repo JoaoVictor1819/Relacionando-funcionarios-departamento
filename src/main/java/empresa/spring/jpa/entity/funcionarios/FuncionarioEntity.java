@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import empresa.spring.jpa.dto.funcionariosDto.FuncionariosResponseDto;
 import empresa.spring.jpa.entity.departamento.DepartamentoEntity;
 import empresa.spring.jpa.entity.endereco.EnderecoEntity;
+import empresa.spring.jpa.entity.projetos.ProjetoEntity;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -49,5 +50,13 @@ public class FuncionarioEntity {
     @JoinColumn(name = "departamento_id")
     public DepartamentoEntity departamento;
 
+
+    @ManyToMany
+    @JoinTable(
+            name = "Funcionarios_Projetos",
+            joinColumns = @JoinColumn(name = "funcionario_id"),
+            inverseJoinColumns = @JoinColumn(name = "projetos_id")
+    )
+    public Set<ProjetoEntity> projetos = new HashSet<>();
 
 }

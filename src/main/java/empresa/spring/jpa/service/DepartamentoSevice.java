@@ -3,6 +3,7 @@ package empresa.spring.jpa.service;
 import empresa.spring.jpa.dto.departamentoDto.DepartamentoRequestDto;
 import empresa.spring.jpa.dto.departamentoDto.DepartamentoResponseDto;
 import empresa.spring.jpa.dto.funcionariosDto.FuncionariosResponseDto;
+import empresa.spring.jpa.dto.projetoDto.ProjetoResponseDto;
 import empresa.spring.jpa.entity.departamento.DepartamentoEntity;
 import empresa.spring.jpa.exception.BadRequestExceptionHandler;
 import empresa.spring.jpa.repository.DepartamentoRepository;
@@ -56,7 +57,8 @@ public class DepartamentoSevice {
                        f.getEmail(),
                        f.getDepartamento().getId(),
                        f.getDepartamento().getNome(),
-                       f.getEndereco()))
+                       f.getEndereco(),
+                       f.getProjetos()))
                .toList();
 
        return new DepartamentoResponseDto(departamentoEntity.getId(),
@@ -83,7 +85,7 @@ public class DepartamentoSevice {
                 .orElseThrow(() -> new BadRequestExceptionHandler("Departamento não encontrado"));
 
         List<FuncionariosResponseDto> funcionariosResponseDto = departamento.getFuncionarios().stream()
-                .map(f -> new FuncionariosResponseDto(f.getId(),f.getDataCriacao(),f.getNome(),f.getEmail(),f.getDepartamento().getId(), f.getDepartamento().getNome(), f.getEndereco()))
+                .map(f -> new FuncionariosResponseDto(f.getId(),f.getDataCriacao(),f.getNome(),f.getEmail(),f.getDepartamento().getId(), f.getDepartamento().getNome(), f.getEndereco(), f.getProjetos()))
                 .toList();
 
         return new DepartamentoResponseDto(departamento.getId(),

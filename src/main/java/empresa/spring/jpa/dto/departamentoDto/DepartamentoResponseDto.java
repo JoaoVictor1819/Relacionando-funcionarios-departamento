@@ -2,6 +2,7 @@ package empresa.spring.jpa.dto.departamentoDto;
 
 
 import empresa.spring.jpa.dto.funcionariosDto.FuncionariosResponseDto;
+import empresa.spring.jpa.dto.projetoDto.ProjetoResponseDto;
 import empresa.spring.jpa.entity.funcionarios.FuncionarioEntity;
 import jakarta.persistence.Column;
 import lombok.*;
@@ -26,4 +27,5 @@ public class DepartamentoResponseDto {
     public String descricao;
 
     public List<FuncionariosResponseDto> funcionarios;
+
 }
