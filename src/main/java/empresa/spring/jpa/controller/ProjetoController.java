@@ -29,7 +29,14 @@ public class ProjetoController {
 
     @GetMapping
     public ResponseEntity<List<ProjetoResponseDto>> findAll(){
-        List<ProjetoResponseDto> projetos = projetoService.getProjeto();
+        List<ProjetoResponseDto> projetos = projetoService.getProjetoAll();
         return ResponseEntity.status(HttpStatus.OK).body(projetos);
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity deleteProjet(@PathVariable Long id){
+        projetoService.deleteProjeto(id);
+        return  ResponseEntity.status(HttpStatus.NO_CONTENT).body("Projeto deletado com sucesso!");
+    }
+
 }

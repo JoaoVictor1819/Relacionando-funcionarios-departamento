@@ -25,6 +25,7 @@ public class ProjetoEntity {
     @Column(nullable = false)
     public String nome;
 
+
     @ManyToMany(mappedBy = "projetos")
     public Set<FuncionarioEntity> funcionarios = new HashSet<>();
 }

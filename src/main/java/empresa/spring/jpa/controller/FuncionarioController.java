@@ -2,10 +2,12 @@ package empresa.spring.jpa.controller;
 
 import empresa.spring.jpa.dto.funcionariosDto.FuncionariosRequestDto;
 import empresa.spring.jpa.dto.funcionariosDto.FuncionariosResponseDto;
+import empresa.spring.jpa.entity.FuncionarioResumoProjection;
 import empresa.spring.jpa.entity.funcionarios.FuncionarioEntity;
 import empresa.spring.jpa.service.FuncionariosService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -31,6 +33,12 @@ public class FuncionarioController {
     public ResponseEntity<List<FuncionariosResponseDto>> findAllFuncionarios() {
         var funcionarios = funcionariosService.findAll();
         return  ResponseEntity.status(HttpStatus.OK).body(funcionarios);
+    }
+
+    @GetMapping("/page/{page}/size/{size}")
+    public ResponseEntity<Page<FuncionarioResumoProjection>> pageableFuncionarioAll(@PathVariable Integer page, @PathVariable Integer size) {
+        Page<FuncionarioResumoProjection> funcionarioResumoProjections = funcionariosService.findAllFuncionariosPage(page, size);
+        return ResponseEntity.status(HttpStatus.OK).body(funcionarioResumoProjections);
     }
 
     @PutMapping("/{id}")
