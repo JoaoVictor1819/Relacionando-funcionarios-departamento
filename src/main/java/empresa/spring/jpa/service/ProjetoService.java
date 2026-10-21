@@ -54,7 +54,7 @@ public class ProjetoService {
 //                .toList();
 
 
-        return new ProjetoResponseDto(p.getId(), p.getNome());
+        return new ProjetoResponseDto(p.getId(), p.getData(), p.getNome(), p.getDescricao());
     }
 
     @Transactional
