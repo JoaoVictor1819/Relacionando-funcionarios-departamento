@@ -3,6 +3,8 @@ package empresa.spring.jpa.controller;
 import empresa.spring.jpa.dto.departamentoDto.DepartamentoRequestDto;
 import empresa.spring.jpa.dto.departamentoDto.DepartamentoResponseDto;
 import empresa.spring.jpa.service.DepartamentoSevice;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -14,12 +16,14 @@ import java.util.List;
 @RestController
 @RequestMapping("/empresa/departamentos")
 @RequiredArgsConstructor
+@Tag(name = "Gerenciador de departamentto")
 public class DepartamentoController {
 
     private final DepartamentoSevice departamentoSevice;
 
 
     @PostMapping
+    @Operation(summary = "Criar Departamento", description = "Metodo responsavel pela criacao dos departamentos")
     public ResponseEntity saveDepartamento(@Valid  @RequestBody DepartamentoRequestDto dto){
         departamentoSevice.save(dto);
         return ResponseEntity.status(HttpStatus.CREATED).body("Departamento criado com sucesso");
