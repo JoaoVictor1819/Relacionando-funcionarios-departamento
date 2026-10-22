@@ -38,4 +38,11 @@ public class EnderecoController {
         List<EnderecoResponseDto> enderecoResponseDto = enderecoService.findByEstado(estado);
         return ResponseEntity.status(HttpStatus.OK).body(enderecoResponseDto);
     }
+
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity deleteEndereco(@PathVariable Long id){
+        enderecoService.deleteEndereco(id);
+        return ResponseEntity.status(HttpStatus.OK).body("Endereco Deletado para usuario");
+    }
 }

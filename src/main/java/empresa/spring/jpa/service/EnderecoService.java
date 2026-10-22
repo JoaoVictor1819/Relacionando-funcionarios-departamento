@@ -9,6 +9,7 @@ import empresa.spring.jpa.exception.BadRequestExceptionHandler;
 import empresa.spring.jpa.exception.ResouceExceptionHandler;
 import empresa.spring.jpa.repository.EnderecoRepository;
 import empresa.spring.jpa.repository.FuncionariosRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -63,6 +64,14 @@ public class EnderecoService {
         return endereco.stream()
                 .map(this::toResponse)
                 .toList();
+    }
+
+    @Transactional
+    public void deleteEndereco(Long id){
+        EnderecoEntity endereco = enderecoRepository.findById(id)
+                .orElseThrow(() -> new ResouceExceptionHandler("Este endereco ano existe"));
+
+        enderecoRepository.delete(endereco);
     }
 
 }
