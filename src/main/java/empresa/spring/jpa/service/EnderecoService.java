@@ -75,4 +75,28 @@ public class EnderecoService {
     }
 
 
+    @Transactional
+    public void UpdateEndereco(Long id, EnderecoRequestDto dto){
+        FuncionarioEntity funcionario = funcionariosRepository.findById(dto.getIdFuncionario())
+                .orElseThrow(() -> new ResouceExceptionHandler("Nao existe funcionario com este id"));
+
+        enderecoRepository.findById(id)
+                .orElseThrow(() -> new ResouceExceptionHandler("nao existe endereco com este id"));
+
+        EnderecoEntity enderecoEntity = EnderecoEntity.builder()
+                .cep(dto.getCep())
+                .estado(dto.getEstado())
+                .cidade(dto.getCidade())
+                .rua(dto.getRua())
+                .numeroCasa(dto.getNumeroCasa())
+                .build();
+
+        funcionario.setEndereco(enderecoEntity);
+        funcionariosRepository.save(funcionario);
+
+
+
+    }
+
+
 }

@@ -71,10 +71,22 @@ public class ProjetoService {
         projetoRepository.delete(projetoEntity);
     }
 
-
     public Page<ProjetosResumoProjection> getAllProjetoPage(Integer page, Integer size){
        return projetoRepository.getAllProjetePageable(PageRequest.of(page, size));
     }
 
+
+    @Transactional
+    public ProjetoResponseDto update(Long id, ProjetoRequesteDto dto){
+        ProjetoEntity projetoEntity = projetoRepository.findById(id)
+                .orElseThrow(() -> new ResouceExceptionHandler("Este id nao existe e nao poderar ser modificado!"));
+
+        projetoEntity.setNome(dto.nome);
+        projetoEntity.setDescricao(dto.descricao);
+
+
+        ProjetoEntity projetoEntityUpdated = projetoRepository.save(projetoEntity);
+        return toResponse(projetoEntityUpdated);
+    }
 
 }

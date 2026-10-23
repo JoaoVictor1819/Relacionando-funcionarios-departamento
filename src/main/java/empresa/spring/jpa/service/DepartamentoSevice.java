@@ -6,6 +6,7 @@ import empresa.spring.jpa.dto.funcionariosDto.FuncionariosResponseDto;
 import empresa.spring.jpa.dto.projetoDto.ProjetoResponseDto;
 import empresa.spring.jpa.entity.departamento.DepartamentoEntity;
 import empresa.spring.jpa.exception.BadRequestExceptionHandler;
+import empresa.spring.jpa.exception.ResouceExceptionHandler;
 import empresa.spring.jpa.repository.DepartamentoRepository;
 import empresa.spring.jpa.repository.FuncionariosRepository;
 import jakarta.transaction.Transactional;
@@ -106,6 +107,19 @@ public class DepartamentoSevice {
         }
 
         departamentoRepository.delete(departamento);
+    }
+
+    @Transactional
+    public DepartamentoResponseDto UpdateDepartamento(Long id, DepartamentoRequestDto dto){
+        DepartamentoEntity departamento = departamentoRepository.findById(id)
+                .orElseThrow(() -> new ResouceExceptionHandler("Este id nao faz parte de nenhum departamento existente"));
+
+        departamento.setNome(dto.getNome());
+        departamento.setSalarioFixo(dto.getSalarioFixo());
+        departamento.setDescricao(dto.getDescricao());
+
+        DepartamentoEntity departamentoUpdate = departamentoRepository.save(departamento);
+        return toResponse(departamentoUpdate);
     }
 
 }

@@ -45,4 +45,10 @@ public class EnderecoController {
         enderecoService.deleteEndereco(id);
         return ResponseEntity.status(HttpStatus.OK).body("Endereco Deletado para usuario");
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity updateEndereco(@PathVariable Long id, @Valid @RequestBody EnderecoRequestDto dto){
+        enderecoService.UpdateEndereco(id, dto);
+        return ResponseEntity.status(HttpStatus.OK).body("Endereco Atualizado para usuario");
+    }
 }

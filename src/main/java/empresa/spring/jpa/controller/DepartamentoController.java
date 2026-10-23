@@ -52,4 +52,10 @@ public class DepartamentoController {
         departamentoSevice.delete(id);
         return ResponseEntity.status(HttpStatus.OK).body("Departamento deletado com sucesso");
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<DepartamentoResponseDto> updateDepartamento(@Valid @PathVariable Long id, @RequestBody DepartamentoRequestDto dto){
+        DepartamentoResponseDto departamentoResponseDto = departamentoSevice.UpdateDepartamento(id, dto);
+        return ResponseEntity.status(HttpStatus.OK).body(departamentoResponseDto);
+    }
 }

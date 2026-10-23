@@ -47,5 +47,11 @@ public class ProjetoController {
         return  ResponseEntity.status(HttpStatus.NO_CONTENT).body("Projeto deletado com sucesso!");
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<ProjetoResponseDto> updateProjeto(@Valid @RequestBody ProjetoRequesteDto dto, @PathVariable Long id){
+        ProjetoResponseDto projetoResponseDto = projetoService.update(id, dto);
+        return ResponseEntity.status(HttpStatus.OK).body(projetoResponseDto);
+    }
+
 
 }
