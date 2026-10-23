@@ -4,6 +4,7 @@ package empresa.spring.jpa.controller;
 import empresa.spring.jpa.dto.enderecoDto.EnderecoRequestDto;
 import empresa.spring.jpa.dto.enderecoDto.EnderecoResponseDto;
 import empresa.spring.jpa.service.EnderecoService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -15,6 +16,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/empresa/funcionario/endereco")
 @RequiredArgsConstructor
+@Tag(name = "Gerengiador de Endereco de funcionarios")
 public class EnderecoController {
 
     private final EnderecoService enderecoService;

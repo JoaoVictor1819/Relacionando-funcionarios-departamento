@@ -6,6 +6,7 @@ import empresa.spring.jpa.dto.projetoDto.ProjetoResponseDto;
 import empresa.spring.jpa.entity.ProjetosResumoProjection;
 import empresa.spring.jpa.entity.projetos.ProjetoEntity;
 import empresa.spring.jpa.service.ProjetoService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -18,6 +19,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/empresa/projetos")
 @RequiredArgsConstructor
+@Tag(name = "Gerenciador de Projetos")
 public class ProjetoController {
 
     private final ProjetoService projetoService;

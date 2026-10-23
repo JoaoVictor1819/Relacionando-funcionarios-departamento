@@ -5,6 +5,7 @@ import empresa.spring.jpa.dto.funcionariosDto.FuncionariosResponseDto;
 import empresa.spring.jpa.entity.FuncionarioResumoProjection;
 import empresa.spring.jpa.entity.funcionarios.FuncionarioEntity;
 import empresa.spring.jpa.service.FuncionariosService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -17,6 +18,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/empresa/funcionarios")
 @RequiredArgsConstructor
+@Tag(name = "Gerenciador de funcionarios")
 public class FuncionarioController {
 
     private final FuncionariosService funcionariosService;
