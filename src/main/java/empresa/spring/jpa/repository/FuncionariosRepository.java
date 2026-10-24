@@ -12,6 +12,8 @@ import java.util.Optional;
 public interface FuncionariosRepository extends JpaRepository<FuncionarioEntity, Long> {
 
 
+    Optional<FuncionarioEntity> findByEmail(String email);
+
     Optional<FuncionarioEntity> findByDepartamento(Long IdDepartamento);
 
     @NativeQuery(

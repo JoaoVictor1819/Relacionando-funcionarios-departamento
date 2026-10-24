@@ -26,6 +26,6 @@ public class ProjetoResponseDto {
 
     public String descricao;
 
-//    public List<FuncionariosResponseDto> funcionarios;
+
 
 }

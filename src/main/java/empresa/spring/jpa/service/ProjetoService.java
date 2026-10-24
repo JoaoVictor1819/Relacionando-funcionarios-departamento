@@ -6,6 +6,7 @@ import empresa.spring.jpa.dto.projetoDto.ProjetoResponseDto;
 import empresa.spring.jpa.entity.ProjetosResumoProjection;
 import empresa.spring.jpa.entity.funcionarios.FuncionarioEntity;
 import empresa.spring.jpa.entity.projetos.ProjetoEntity;
+import empresa.spring.jpa.exception.BadRequestExceptionHandler;
 import empresa.spring.jpa.exception.ResouceExceptionHandler;
 import empresa.spring.jpa.repository.FuncionariosRepository;
 import empresa.spring.jpa.repository.ProjetoRepository;
@@ -28,8 +29,10 @@ public class ProjetoService {
     @Transactional
     public ProjetoEntity saveProjeto(ProjetoRequesteDto dto){
 
-       var projetos = new ProjetoEntity();
-       projetos.setNome(dto.nome);
+
+        var projetos = new ProjetoEntity();
+       projetos.setNome(dto.getNome());
+       projetos.setDescricao(dto.getDescricao());
 
        return projetoRepository.save(projetos);
     }
@@ -44,17 +47,6 @@ public class ProjetoService {
     }
 
     private  ProjetoResponseDto toResponse(ProjetoEntity p){
-//        List<FuncionariosResponseDto> funcionariosResponseDtos = p.getFuncionarios().stream()
-//                .map(f -> new FuncionariosResponseDto(f.getId(),
-//                        f.getDataCriacao(),
-//                        f.getNome(),
-//                        f.getEmail(),
-//                        f.getDepartamento().getId(),
-//                        f.getDepartamento().getNome(),
-//                        f.getEndereco(),
-//                        f.getProjetos()))
-//                .toList();
-
 
         return new ProjetoResponseDto(p.getId(), p.getData(), p.getNome(), p.getDescricao());
     }

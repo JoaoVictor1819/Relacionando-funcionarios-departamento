@@ -36,6 +36,13 @@ public class FuncionariosService {
         DepartamentoEntity departamento = departamentoRepository.findById(dto.getIdDepartamento())
                 .orElseThrow(() -> new ResouceExceptionHandler("Departamento não encontrado"));
 
+        FuncionarioEntity funcionarioEmail = funcionariosRepository.findByEmail(dto.getEmail())
+                .orElse(null);
+
+        if (funcionarioEmail != null){
+            throw new BadRequestExceptionHandler("Este email ja exite tento outro");
+        }
+
         List<ProjetoEntity> projetoEntities = projetoRepository.findAllById(dto.idProjeto);
 
         if (projetoEntities.isEmpty() || projetoEntities == null){
@@ -65,7 +72,7 @@ public class FuncionariosService {
         List<ProjetoResponseDto> projetoResponseDtos = f.getProjetos().stream()
                 .map(projeto -> new ProjetoResponseDto(projeto.getId(), projeto.getData(), projeto.getNome(), projeto.getDescricao()))
                 .toList();
-        return new FuncionariosResponseDto(f.getId(), f.getDataCriacao(), f.getNome(), f.getEmail(), f.getDepartamento().getId(), f.getDepartamento().getNome(), f.getEndereco(), projetoResponseDtos);
+        return new FuncionariosResponseDto(f.getId(), f.getDataCriacao(), f.getNome(), f.getEmail(), f.getDepartamento().getId(), f.getDepartamento().getNome(), f.getEndereco(), f.getProjetos());
     }
 
 
