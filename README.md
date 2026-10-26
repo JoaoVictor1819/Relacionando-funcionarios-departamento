@@ -1,6 +1,6 @@
 # Sistema de controle de funcionarios
 
-## Sistema simples de controle de funcionario que abranje: 
+## Sistema simples de controle de funcionario que abrange: 
 - Funcionarios
 - Departamento 
 - Projetos
