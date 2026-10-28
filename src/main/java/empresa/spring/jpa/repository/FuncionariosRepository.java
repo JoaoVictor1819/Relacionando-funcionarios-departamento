@@ -7,10 +7,13 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.NativeQuery;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface FuncionariosRepository extends JpaRepository<FuncionarioEntity, Long> {
 
+
+    List<FuncionarioEntity> findByNomeContainingIgnoreCase(String nome);
 
     Optional<FuncionarioEntity> findByEmail(String email);
 
