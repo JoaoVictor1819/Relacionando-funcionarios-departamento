@@ -8,6 +8,7 @@ import empresa.spring.jpa.entity.departamento.DepartamentoEntity;
 import empresa.spring.jpa.entity.endereco.EnderecoEntity;
 import empresa.spring.jpa.entity.projetos.ProjetoEntity;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.*;
 
 import java.time.format.DateTimeFormatter;

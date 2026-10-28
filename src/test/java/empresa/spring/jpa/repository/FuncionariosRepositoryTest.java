@@ -1,13 +1,16 @@
 package empresa.spring.jpa.repository;
 
 import empresa.spring.jpa.entity.funcionarios.FuncionarioEntity;
+import jakarta.validation.ConstraintViolationException;
 import lombok.extern.log4j.Log4j2;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.data.jpa.test.autoconfigure.DataJpaTest;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 
+import java.lang.module.ResolutionException;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -81,7 +84,9 @@ class FuncionariosRepositoryTest {
 
         List<FuncionarioEntity> funcionarios = this.funcionariosRepository.findByNomeContainingIgnoreCase(nome);
 
-        Assertions.assertThat(funcionarios).isNotEmpty();
+        Assertions.assertThat(funcionarios)
+                .isNotEmpty()
+                .contains(savedFuncionario);
 
         Assertions.assertThat(funcionarios).contains(savedFuncionario);
 
@@ -90,10 +95,24 @@ class FuncionariosRepositoryTest {
 
     @Test
     @DisplayName("Find by name returns empty list when on funcionarios is found")
-    void FindByName_ReturnEmptyListOfFuncionario_WhenSuccessful(){
+    void FindByName_ReturnEmptyListOfFuncionario_WhenFuncionariosNotFound(){
         List<FuncionarioEntity> funcionarios = this.funcionariosRepository.findByNomeContainingIgnoreCase("nenhum");
 
         Assertions.assertThat(funcionarios).isEmpty();
+
+    }
+
+
+    @Test
+    @DisplayName("Save throw ConstraintValidationException when name is empty")
+    void save_throwConstraintValidationException_WhenNameIsEmpty(){
+        FuncionarioEntity funcionario = new FuncionarioEntity();
+//        Assertions.assertThatThrownBy(() -> this.funcionariosRepository.save(funcionario))
+//                .isInstanceOf(MethodArgumentNotValidException.class);
+
+        Assertions.assertThatExceptionOfType(ConstraintViolationException.class)
+                .isThrownBy(() -> this.funcionariosRepository.save(funcionario))
+                .withMessageContaining("nome nao e vazio");
 
     }
 
