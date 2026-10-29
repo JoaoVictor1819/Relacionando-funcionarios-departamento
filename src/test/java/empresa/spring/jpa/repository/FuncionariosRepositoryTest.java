@@ -1,6 +1,7 @@
 package empresa.spring.jpa.repository;
 
 import empresa.spring.jpa.entity.funcionarios.FuncionarioEntity;
+import empresa.spring.jpa.util.FuncionarioCreator;
 import jakarta.validation.ConstraintViolationException;
 import lombok.extern.log4j.Log4j2;
 import org.assertj.core.api.Assertions;
@@ -26,7 +27,7 @@ class FuncionariosRepositoryTest {
     @Test
     @DisplayName("Save persists Funcionários when Successful")
     void save_PersisteFuncionario_WhenSuccessful(){
-        FuncionarioEntity funcionarioToBeSaved = createFuncionarioToBeSaved();
+        FuncionarioEntity funcionarioToBeSaved = FuncionarioCreator.createFuncionarioToBeSaved();
 
         FuncionarioEntity savedFuncionario = this.funcionariosRepository.save(funcionarioToBeSaved);
 
@@ -41,7 +42,7 @@ class FuncionariosRepositoryTest {
     @Test
     @DisplayName("Save update Funcionários when Successful")
     void save_UpdatesFuncionario_WhenSuccessful(){
-        FuncionarioEntity funcionarioToBeSaved = createFuncionarioToBeSaved();
+        FuncionarioEntity funcionarioToBeSaved = FuncionarioCreator.createFuncionarioToBeSaved();
 
         FuncionarioEntity savedFuncionario = this.funcionariosRepository.save(funcionarioToBeSaved);
 
@@ -61,7 +62,7 @@ class FuncionariosRepositoryTest {
     @Test
     @DisplayName("Delete removes Funcionários when Successful")
     void Delete_RemovesFuncionario_WhenSuccessful(){
-        FuncionarioEntity funcionarioToBeSaved = createFuncionarioToBeSaved();
+        FuncionarioEntity funcionarioToBeSaved = FuncionarioCreator.createFuncionarioToBeSaved();
 
         FuncionarioEntity savedFuncionario = this.funcionariosRepository.save(funcionarioToBeSaved);
 
@@ -76,7 +77,7 @@ class FuncionariosRepositoryTest {
     @Test
     @DisplayName("Find by name Funcionários when Successful")
     void FindByName_ReturnListOfFuncionario_WhenSuccessful(){
-        FuncionarioEntity funcionarioToBeSaved = createFuncionarioToBeSaved();
+        FuncionarioEntity funcionarioToBeSaved = FuncionarioCreator.createFuncionarioToBeSaved();
 
         FuncionarioEntity savedFuncionario = this.funcionariosRepository.save(funcionarioToBeSaved);
 

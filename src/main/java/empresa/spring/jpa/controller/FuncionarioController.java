@@ -3,7 +3,6 @@ package empresa.spring.jpa.controller;
 import empresa.spring.jpa.dto.funcionariosDto.FuncionariosRequestDto;
 import empresa.spring.jpa.dto.funcionariosDto.FuncionariosResponseDto;
 import empresa.spring.jpa.entity.FuncionarioResumoProjection;
-import empresa.spring.jpa.entity.funcionarios.FuncionarioEntity;
 import empresa.spring.jpa.service.FuncionariosService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
@@ -35,6 +34,12 @@ public class FuncionarioController {
     public ResponseEntity<List<FuncionariosResponseDto>> findAllFuncionarios() {
         var funcionarios = funcionariosService.findAll();
         return  ResponseEntity.status(HttpStatus.OK).body(funcionarios);
+    }
+
+    @GetMapping("/funcionarioList/{name}")
+    public ResponseEntity<List<FuncionariosResponseDto>> findByNameList(@PathVariable String name){
+        List<FuncionariosResponseDto> funcionariosResponseDtos = funcionariosService.listFuncionariosName(name);
+        return ResponseEntity.status(HttpStatus.OK).body(funcionariosResponseDtos);
     }
 
     @GetMapping("/page/{page}/size/{size}")

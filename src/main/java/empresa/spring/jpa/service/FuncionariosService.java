@@ -10,14 +10,12 @@ import empresa.spring.jpa.entity.projetos.ProjetoEntity;
 import empresa.spring.jpa.exception.BadRequestExceptionHandler;
 import empresa.spring.jpa.exception.ResouceExceptionHandler;
 import empresa.spring.jpa.repository.DepartamentoRepository;
-import empresa.spring.jpa.repository.EnderecoRepository;
 import empresa.spring.jpa.repository.FuncionariosRepository;
 import empresa.spring.jpa.repository.ProjetoRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -28,7 +26,6 @@ public class FuncionariosService {
 
     private final FuncionariosRepository funcionariosRepository;
     private  final DepartamentoRepository departamentoRepository;
-    private final EnderecoRepository enderecoRepository;
     private final ProjetoRepository projetoRepository;
 
     @Transactional
@@ -63,6 +60,7 @@ public class FuncionariosService {
     public List<FuncionariosResponseDto> findAll(){
         List<FuncionarioEntity> funcionarios = funcionariosRepository.findAll();
 
+
         return funcionarios.stream()
                 .map(this::toResponse)
                 .toList();
@@ -78,6 +76,17 @@ public class FuncionariosService {
 
     public Page<FuncionarioResumoProjection> findAllFuncionariosPage(Integer page, Integer size) {
         return funcionariosRepository.getAllFuncionarioPage(PageRequest.of(page, size));
+    }
+
+    public List<FuncionariosResponseDto> listFuncionariosName(String name){
+        List<FuncionarioEntity> funcionarioEntities = funcionariosRepository.findByNomeContainingIgnoreCase(name);
+
+        if (funcionarioEntities == null){
+            throw new ResouceExceptionHandler("Nao existe nenhum funcionario cadastrado");
+        }
+        return funcionarioEntities.stream()
+                .map(this::toResponse)
+                .toList();
     }
 
 
