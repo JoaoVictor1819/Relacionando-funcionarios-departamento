@@ -29,7 +29,7 @@ public class FuncionariosService {
     private final ProjetoRepository projetoRepository;
 
     @Transactional
-    public FuncionarioEntity saveFuncionario(FuncionariosRequestDto dto){
+    public void saveFuncionario(FuncionariosRequestDto dto){
         DepartamentoEntity departamento = departamentoRepository.findById(dto.getIdDepartamento())
                 .orElseThrow(() -> new ResouceExceptionHandler("Departamento não encontrado"));
 
@@ -53,7 +53,7 @@ public class FuncionariosService {
         funcionario.setDepartamento(departamento);
         funcionario.getProjetos().addAll(projetoEntities);
 
-        return funcionariosRepository.save(funcionario);
+        funcionariosRepository.save(funcionario);
     }
 
 

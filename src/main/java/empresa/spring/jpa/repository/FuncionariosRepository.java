@@ -16,8 +16,6 @@ public interface FuncionariosRepository extends JpaRepository<FuncionarioEntity,
 
     List<FuncionarioEntity> findByNomeContainingIgnoreCase(String nome);
 
-    List<FuncionarioEntity> listAll(EnderecoEntity endereco);
-
     Optional<FuncionarioEntity> findByEmail(String email);
 
     Optional<FuncionarioEntity> findByDepartamento(Long IdDepartamento);
