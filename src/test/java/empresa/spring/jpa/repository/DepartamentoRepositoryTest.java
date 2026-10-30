@@ -42,6 +42,20 @@ class DepartamentoRepositoryTest {
 
     }
 
+    @Test
+    @DisplayName("Should not get User from DB when user not exists")
+    void findByNomeSuccessCase2() {
+        DepartamentoEntity departamento = new DepartamentoEntity(
+                DepartamentoRequestDto.builder()
+                        .build());
+
+
+        Optional<DepartamentoEntity> resultByNome = this.departamentoRepository.findByNome(departamento.getNome());
+
+        assertThat(resultByNome.isEmpty()).isTrue();
+
+    }
+
 
     private DepartamentoEntity creatDepartamento(DepartamentoRequestDto dto){
          DepartamentoEntity newDepartamento = new DepartamentoEntity(dto);
