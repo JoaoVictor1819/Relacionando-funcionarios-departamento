@@ -1,6 +1,7 @@
 package empresa.spring.jpa.entity.departamento;
 
 
+import empresa.spring.jpa.dto.departamentoDto.DepartamentoRequestDto;
 import empresa.spring.jpa.entity.funcionarios.FuncionarioEntity;
 import jakarta.persistence.*;
 import lombok.*;
@@ -38,4 +39,9 @@ public class DepartamentoEntity {
     public Set<FuncionarioEntity> funcionarios = new HashSet<>();
 
 
+    public DepartamentoEntity(DepartamentoRequestDto dto)    {
+        this.nome = dto.getNome();
+        this.salarioFixo = dto.getSalarioFixo();
+        this.descricao = dto.getDescricao();
+    }
 }
