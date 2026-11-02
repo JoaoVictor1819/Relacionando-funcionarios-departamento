@@ -30,12 +30,14 @@ public class DepartamentoController {
     }
 
     @GetMapping
+    @Operation(summary = "Listar Departamentos", description = "Metodo responsavel por listar todos os departamentos")
     public ResponseEntity<List<DepartamentoResponseDto>> findAllDepartamentos(){
         var departamento = departamentoSevice.findAll();
         return ResponseEntity.status(HttpStatus.OK).body(departamento);
     }
 
     @GetMapping("/search/name")
+    @Operation(summary = "Buscar Departamento por nome", description = "Metodo responsavel por buscar departamento pelo nome")
     public ResponseEntity<List<DepartamentoResponseDto>> findByName(@RequestParam (required = false) String name){
         List<DepartamentoResponseDto> departamento = departamentoSevice.findByName(name);
         return ResponseEntity.status(HttpStatus.OK).body(departamento);

@@ -49,12 +49,15 @@ class DepartamentoSeviceTest {
                         .descricao(departamentoCreate1.getDescricao())
                         .build());
 
+        this.departamentoRepository.save(departamentoCreate1);
+
         when(departamentoSevice.findById(2L)).thenReturn(DepartamentoResponseDto.builder()
                         .id(2L)
                         .nome(departamentoCreate2.getNome())
                         .salarioFixo(departamentoCreate2.getSalarioFixo())
                         .descricao(departamentoCreate2.getDescricao())
                         .build());
+        this.departamentoRepository.save(departamentoCreate2);
 
     }
 }
