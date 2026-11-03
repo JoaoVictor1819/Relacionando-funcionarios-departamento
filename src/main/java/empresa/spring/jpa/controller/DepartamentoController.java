@@ -44,18 +44,21 @@ public class DepartamentoController {
     }
 
     @GetMapping("/search/id")
+    @Operation(summary = "Buscar Departamento por id", description = "Metodo responsavel por buscar departamento pelo id")
     public ResponseEntity<DepartamentoResponseDto> findById(@PathVariable Long id){
         DepartamentoResponseDto departamento = departamentoSevice.findById(id);
         return ResponseEntity.status(HttpStatus.OK).body(departamento);
     }
 
     @DeleteMapping("/{id}")
+    @Operation(summary = "Deletar Departamento", description = "Metodo responsavel por deletar departamento pelo id")
     public ResponseEntity deleteDepartamento(@PathVariable Long id){
         departamentoSevice.delete(id);
         return ResponseEntity.status(HttpStatus.OK).body("Departamento deletado com sucesso");
     }
 
     @PutMapping("/{id}")
+    @Operation(summary = "Atualizar Departamento", description = "Metodo responsavel por atualizar departamento pelo id")
     public ResponseEntity<DepartamentoResponseDto> updateDepartamento(@Valid @PathVariable Long id, @RequestBody DepartamentoRequestDto dto){
         DepartamentoResponseDto departamentoResponseDto = departamentoSevice.UpdateDepartamento(id, dto);
         return ResponseEntity.status(HttpStatus.OK).body(departamentoResponseDto);
