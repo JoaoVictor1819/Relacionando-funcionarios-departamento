@@ -5,6 +5,7 @@ import empresa.spring.jpa.dto.departamentoDto.DepartamentoResponseDto;
 import empresa.spring.jpa.entity.departamento.DepartamentoEntity;
 import empresa.spring.jpa.repository.DepartamentoRepository;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -29,6 +30,7 @@ class DepartamentoSeviceTest {
     private DepartamentoRepository departamentoRepository;
 
     @Test
+    @DisplayName("Deve retornar uma lista de departamento")
     public void deveRetornarUmaListaDeDepartamento(){
         DepartamentoEntity departamentoRequest = new DepartamentoEntity(
                 DepartamentoRequestDto.builder()
