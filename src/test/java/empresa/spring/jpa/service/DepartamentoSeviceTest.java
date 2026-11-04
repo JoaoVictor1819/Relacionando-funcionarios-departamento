@@ -1,63 +1,52 @@
 package empresa.spring.jpa.service;
 
 import empresa.spring.jpa.dto.departamentoDto.DepartamentoRequestDto;
-import empresa.spring.jpa.dto.departamentoDto.DepartamentoResponseDto;
 import empresa.spring.jpa.entity.departamento.DepartamentoEntity;
 import empresa.spring.jpa.repository.DepartamentoRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.springframework.util.Assert;
 
 import java.math.BigDecimal;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.when;
+import java.util.Optional;
 
 class DepartamentoSeviceTest {
 
     @Mock
-    private DepartamentoRepository departamentoRepository;
+    DepartamentoRepository departamentoRepository;
 
     @InjectMocks
-    private DepartamentoSevice departamentoSevice;
+    DepartamentoSevice departamentoSevice;
 
 
     @Test
-    @DisplayName("Should create departamento successfully everything is OK")
-    void save() {
-        // Arrange: Configurar o comportamento do mock
-        DepartamentoEntity departamentoCreate1 = new DepartamentoEntity(
+    @DisplayName("It should successfully save the Department to the database.")
+    void SaveDepartamento() {
+        // Given / Arrange
+
+        DepartamentoEntity departamento = new DepartamentoEntity(
                 DepartamentoRequestDto.builder()
-                        .nome("Test nome")
-                        .salarioFixo(new BigDecimal(4324))
-                        .descricao("Test Descricao")
+                        .nome("Victor")
+                        .descricao("Descricao")
+                        .salarioFixo(new BigDecimal(2032))
                         .build()
         );
 
-        DepartamentoEntity departamentoCreate2 = new DepartamentoEntity(DepartamentoRequestDto.builder()
-                .nome("Test nome2")
-                .salarioFixo(new BigDecimal(4324))
-                .descricao("Test Descricao2")
-                .build());
+        //when / Act
+
+        DepartamentoEntity save = this.departamentoRepository.save(departamento);
 
 
-        when(departamentoSevice.findById(1L)).thenReturn(DepartamentoResponseDto.builder()
-                        .id(1L)
-                        .nome(departamentoCreate1.getNome())
-                        .salarioFixo(departamentoCreate1.getSalarioFixo())
-                        .descricao(departamentoCreate1.getDescricao())
-                        .build());
+        //then / Assert
 
-        this.departamentoRepository.save(departamentoCreate1);
+        Assert.notNull(save.getNome(), "Departamento salvo com sucesso");
 
-        when(departamentoSevice.findById(2L)).thenReturn(DepartamentoResponseDto.builder()
-                        .id(2L)
-                        .nome(departamentoCreate2.getNome())
-                        .salarioFixo(departamentoCreate2.getSalarioFixo())
-                        .descricao(departamentoCreate2.getDescricao())
-                        .build());
-        this.departamentoRepository.save(departamentoCreate2);
 
     }
+
+
+
+
 }

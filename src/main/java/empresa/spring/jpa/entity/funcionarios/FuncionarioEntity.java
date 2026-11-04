@@ -39,7 +39,7 @@ public class FuncionarioEntity {
     @Column(name = "Email_Funcionario", unique = true)
     public String email;
 
-    @Column(name = "Senha_Funcionario")
+    @Column(name = "Senha_Funcionario", length = 18)
     public String senha;
 
 
