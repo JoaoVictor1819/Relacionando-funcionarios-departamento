@@ -3,7 +3,7 @@ package empresa.spring.jpa.service;
 import empresa.spring.jpa.dto.departamentoDto.DepartamentoRequestDto;
 import empresa.spring.jpa.dto.departamentoDto.DepartamentoResponseDto;
 import empresa.spring.jpa.entity.departamento.DepartamentoEntity;
-import empresa.spring.jpa.exception.BadRequestExceptionHandler;
+
 import empresa.spring.jpa.repository.DepartamentoRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -61,9 +61,7 @@ class DepartamentoSeviceTest {
         Mockito.when(departamentoRepository.findByNome(departamentoRequest.getNome()))
                 .thenReturn(java.util.Optional.of(departamentoEntity));
 
-        Assertions.assertThrows(RuntimeException.class, () -> {
-            departamentoSevice.save(departamentoRequest);
-        });
+        Assertions.assertThrows(RuntimeException.class, () -> {departamentoSevice.save(departamentoRequest);});
     }
 
 }
