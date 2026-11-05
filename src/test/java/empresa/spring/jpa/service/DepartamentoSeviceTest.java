@@ -3,7 +3,6 @@ package empresa.spring.jpa.service;
 import empresa.spring.jpa.dto.departamentoDto.DepartamentoRequestDto;
 import empresa.spring.jpa.dto.departamentoDto.DepartamentoResponseDto;
 import empresa.spring.jpa.entity.departamento.DepartamentoEntity;
-
 import empresa.spring.jpa.repository.DepartamentoRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -33,15 +32,16 @@ class DepartamentoSeviceTest {
     @Test
     @DisplayName("Deve retornar uma lista de departamento")
     public void deveRetornarUmaListaDeDepartamento(){
-        DepartamentoEntity departamentoRequest = new DepartamentoEntity(
+        DepartamentoEntity departamentoRequest1 = new DepartamentoEntity(
                 DepartamentoRequestDto.builder()
-                        .nome("Departamento Teste")
-                        .descricao("Descricao")
+                        .nome("Departamento Teste1")
+                        .descricao("Descricao teste1")
                         .salarioFixo(new BigDecimal(3432))
                         .build()
         );
 
-        Mockito.when(departamentoRepository.findAll()).thenReturn(Collections.singletonList(departamentoRequest));
+
+        Mockito.when(departamentoRepository.findAll()).thenReturn(Collections.singletonList(departamentoRequest1));
         List<DepartamentoResponseDto> departamento = departamentoSevice.findAll();
 
         Assertions.assertEquals(1, departamento.size());
@@ -51,7 +51,7 @@ class DepartamentoSeviceTest {
     @Test
     public void deveLancarExcecaoAoTentarSalvarDepartamentoExistente(){
         DepartamentoRequestDto departamentoRequest = DepartamentoRequestDto.builder()
-                .nome("Departamento Teste")
+                .nome("Departamento Teste1")
                 .descricao("Descricao")
                 .salarioFixo(new BigDecimal(3432))
                 .build();
