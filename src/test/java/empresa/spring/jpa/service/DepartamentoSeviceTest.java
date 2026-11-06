@@ -5,6 +5,7 @@ import empresa.spring.jpa.dto.departamentoDto.DepartamentoResponseDto;
 import empresa.spring.jpa.entity.departamento.DepartamentoEntity;
 import empresa.spring.jpa.repository.DepartamentoRepository;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -16,8 +17,10 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.math.BigDecimal;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.mockito.Mockito.lenient;
 
 @ExtendWith(MockitoExtension.class)
 class DepartamentoSeviceTest {
@@ -29,22 +32,29 @@ class DepartamentoSeviceTest {
     @Mock
     private DepartamentoRepository departamentoRepository;
 
+
+    @BeforeEach
+    public void setUp() {
+        DepartamentoEntity departamentoEntity = new DepartamentoEntity(
+                DepartamentoRequestDto.builder()
+                        .nome("Departamento Teste1")
+                        .descricao("Descricao")
+                        .salarioFixo(new BigDecimal(3432))
+                        .build());
+
+        lenient().when(departamentoRepository.findAll()).thenReturn(Collections.singletonList(departamentoEntity));
+        lenient().when(departamentoRepository.findById(1L)).thenReturn(Optional.of(departamentoEntity));
+    }
+
     @Test
     @DisplayName("Deve retornar uma lista de departamento")
     public void deveRetornarUmaListaDeDepartamento(){
-        DepartamentoEntity departamentoRequest1 = new DepartamentoEntity(
-                DepartamentoRequestDto.builder()
-                        .nome("Departamento Teste1")
-                        .descricao("Descricao teste1")
-                        .salarioFixo(new BigDecimal(3432))
-                        .build()
-        );
-
-
-        Mockito.when(departamentoRepository.findAll()).thenReturn(Collections.singletonList(departamentoRequest1));
         List<DepartamentoResponseDto> departamento = departamentoSevice.findAll();
 
         Assertions.assertEquals(1, departamento.size());
+
+        Mockito.verify(departamentoRepository).findAll();
+        Mockito.verifyNoMoreInteractions(departamentoRepository);
 
     }
 
@@ -62,6 +72,13 @@ class DepartamentoSeviceTest {
                 .thenReturn(java.util.Optional.of(departamentoEntity));
 
         Assertions.assertThrows(RuntimeException.class, () -> {departamentoSevice.save(departamentoRequest);});
+    }
+
+
+    @Test
+    public void buscarPorId(){
+        DepartamentoResponseDto departamentoResponseDto = departamentoSevice.findById(1L);
+        assertNotNull(departamentoResponseDto);
     }
 
 }

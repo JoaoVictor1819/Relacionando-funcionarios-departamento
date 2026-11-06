@@ -72,6 +72,7 @@ public class DepartamentoSevice {
             departamentoRepository.findAll();
         }
 
+        assert departamentoNome != null;
         return departamentoNome.stream()
                 .map(this::toResponse)
                 .toList();
