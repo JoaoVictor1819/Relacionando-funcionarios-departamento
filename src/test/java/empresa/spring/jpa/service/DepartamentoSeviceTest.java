@@ -59,6 +59,7 @@ class DepartamentoSeviceTest {
     }
 
     @Test
+    @DisplayName("Deve lançar exceção ao tentar salvar departamento existente")
     public void deveLancarExcecaoAoTentarSalvarDepartamentoExistente(){
         DepartamentoRequestDto departamentoRequest = DepartamentoRequestDto.builder()
                 .nome("Departamento Teste1")
@@ -76,6 +77,7 @@ class DepartamentoSeviceTest {
 
 
     @Test
+    @DisplayName("Deve buscar departamento por id")
     public void buscarPorId(){
         DepartamentoResponseDto departamentoResponseDto = departamentoSevice.findById(1L);
         assertNotNull(departamentoResponseDto);
