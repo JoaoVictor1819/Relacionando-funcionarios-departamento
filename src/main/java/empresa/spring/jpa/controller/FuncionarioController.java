@@ -28,14 +28,14 @@ public class FuncionarioController {
     @Operation(summary = "Criar Funcionario", description = "Metodo responsavel pela criacao de funcionarios")
     public ResponseEntity saveFuncionario(@Valid @RequestBody FuncionariosRequestDto funcionario){
         funcionariosService.saveFuncionario(funcionario);
-        return ResponseEntity.status(HttpStatus.OK).body("Funcionario criado com sucesso");
+        return ResponseEntity.status(HttpStatus.CREATED).body("Funcionario criado com sucesso");
     }
 
 
     @GetMapping
     @Operation(summary = "Listar Funcionarios", description = "Metodo responsavel por listar todos os funcionarios")
     public ResponseEntity<List<FuncionariosResponseDto>> findAllFuncionarios() {
-        var funcionarios = funcionariosService.findAll();
+        var funcionarios = funcionariosService.findAllFuncionarios();
         return  ResponseEntity.status(HttpStatus.OK).body(funcionarios);
     }
 

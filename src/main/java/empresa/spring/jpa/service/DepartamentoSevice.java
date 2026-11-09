@@ -3,7 +3,9 @@ package empresa.spring.jpa.service;
 import empresa.spring.jpa.dto.departamentoDto.DepartamentoRequestDto;
 import empresa.spring.jpa.dto.departamentoDto.DepartamentoResponseDto;
 import empresa.spring.jpa.dto.funcionariosDto.FuncionariosResponseDto;
+import empresa.spring.jpa.dto.projetoDto.ProjetoResponseDto;
 import empresa.spring.jpa.entity.departamento.DepartamentoEntity;
+import empresa.spring.jpa.entity.projetos.ProjetoEntity;
 import empresa.spring.jpa.exception.BadRequestExceptionHandler;
 import empresa.spring.jpa.exception.ResouceExceptionHandler;
 import empresa.spring.jpa.repository.DepartamentoRepository;
@@ -19,11 +21,10 @@ import java.util.List;
 public class DepartamentoSevice {
 
     private final DepartamentoRepository departamentoRepository;
-    private final FuncionariosRepository funcionariosRepository;
 
 
 
-    public void save(DepartamentoRequestDto dto) {
+    public void saveDepartamento(DepartamentoRequestDto dto) {
         DepartamentoEntity departamento = departamentoRepository.findByNome(dto.getNome())
                 .orElse(null);
 
@@ -38,7 +39,7 @@ public class DepartamentoSevice {
                  .build());
     }
 
-    public List<DepartamentoResponseDto> findAll(){
+    public List<DepartamentoResponseDto> findAllDepartamento(){
         List<DepartamentoEntity> departamento = departamentoRepository.findAll();
 
         return departamento.stream()
@@ -65,7 +66,7 @@ public class DepartamentoSevice {
                funcionarios);
     }
 
-    public List<DepartamentoResponseDto> findByName(String name){
+    public List<DepartamentoResponseDto> findByNameDepartamento(String name){
         List<DepartamentoEntity> departamentoNome = departamentoRepository.findByNomeContainingIgnoreCase(name);
 
         if (departamentoNome == null){
@@ -78,7 +79,7 @@ public class DepartamentoSevice {
                 .toList();
     }
 
-    public DepartamentoResponseDto findById(Long id){
+    public DepartamentoResponseDto findByIdDepartamento(Long id){
         DepartamentoEntity departamento = departamentoRepository.findById(id)
                 .orElseThrow(() -> new BadRequestExceptionHandler("Departamento não encontrado"));
 

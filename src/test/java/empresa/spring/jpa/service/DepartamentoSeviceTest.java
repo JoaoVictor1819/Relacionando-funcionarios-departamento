@@ -49,7 +49,7 @@ class DepartamentoSeviceTest {
     @Test
     @DisplayName("Deve retornar uma lista de departamento")
     public void deveRetornarUmaListaDeDepartamento(){
-        List<DepartamentoResponseDto> departamento = departamentoSevice.findAll();
+        List<DepartamentoResponseDto> departamento = departamentoSevice.findAllDepartamento();
 
         Assertions.assertEquals(1, departamento.size());
 
@@ -72,15 +72,17 @@ class DepartamentoSeviceTest {
         Mockito.when(departamentoRepository.findByNome(departamentoRequest.getNome()))
                 .thenReturn(java.util.Optional.of(departamentoEntity));
 
-        Assertions.assertThrows(RuntimeException.class, () -> {departamentoSevice.save(departamentoRequest);});
+        Assertions.assertThrows(RuntimeException.class, () -> {departamentoSevice.saveDepartamento(departamentoRequest);});
     }
 
 
     @Test
     @DisplayName("Deve buscar departamento por id")
     public void buscarPorId(){
-        DepartamentoResponseDto departamentoResponseDto = departamentoSevice.findById(1L);
+        DepartamentoResponseDto departamentoResponseDto = departamentoSevice.findByIdDepartamento(1L);
         assertNotNull(departamentoResponseDto);
     }
+
+
 
 }

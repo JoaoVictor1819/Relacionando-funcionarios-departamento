@@ -3,6 +3,7 @@ package empresa.spring.jpa.entity.funcionarios;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import empresa.spring.jpa.dto.funcionariosDto.FuncionariosRequestDto;
 import empresa.spring.jpa.dto.funcionariosDto.FuncionariosResponseDto;
 import empresa.spring.jpa.entity.departamento.DepartamentoEntity;
 import empresa.spring.jpa.entity.endereco.EnderecoEntity;
@@ -60,4 +61,9 @@ public class FuncionarioEntity {
     )
     public Set<ProjetoEntity> projetos = new HashSet<>();
 
+    public FuncionarioEntity(FuncionariosRequestDto dto) {
+        this.nome = dto.nome;
+        this.email = dto.email;
+        this.senha = dto.senha;
+    }
 }

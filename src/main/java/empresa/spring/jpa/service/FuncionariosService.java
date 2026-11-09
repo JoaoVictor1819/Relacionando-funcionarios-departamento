@@ -42,7 +42,7 @@ public class FuncionariosService {
 
         List<ProjetoEntity> projetoEntities = projetoRepository.findAllById(dto.idProjeto);
 
-        if (projetoEntities.isEmpty() || projetoEntities == null){
+        if (projetoEntities.isEmpty()){
             throw new ResouceExceptionHandler("Nao existe nenhum projeto com este id");
         }
 
@@ -57,7 +57,7 @@ public class FuncionariosService {
     }
 
 
-    public List<FuncionariosResponseDto> findAll(){
+    public List<FuncionariosResponseDto> findAllFuncionarios(){
         List<FuncionarioEntity> funcionarios = funcionariosRepository.findAll();
 
 
@@ -70,7 +70,7 @@ public class FuncionariosService {
         List<ProjetoResponseDto> projetoResponseDtos = f.getProjetos().stream()
                 .map(projeto -> new ProjetoResponseDto(projeto.getId(), projeto.getData(), projeto.getNome(), projeto.getDescricao()))
                 .toList();
-        return new FuncionariosResponseDto(f.getId(), f.getDataCriacao(), f.getNome(), f.getEmail(), f.getDepartamento().getId(), f.getDepartamento().getNome(), f.getEndereco(), f.getProjetos());
+        return new FuncionariosResponseDto(f.getId(), f.getDataCriacao(), f.getNome(), f.getEmail(), f.getDepartamento().getId(), f.getDepartamento().getNome(), f.getEndereco(), projetoResponseDtos);
     }
 
 
