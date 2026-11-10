@@ -33,29 +33,36 @@ public class FuncionariosService {
         DepartamentoEntity departamento = departamentoRepository.findById(dto.getIdDepartamento())
                 .orElseThrow(() -> new ResouceExceptionHandler("Departamento não encontrado"));
 
-        FuncionarioEntity funcionarioEmail = funcionariosRepository.findByEmail(dto.getEmail())
-                .orElse(null);
+        validarEmail(dto.getEmail());
 
-        if (funcionarioEmail != null){
-            throw new BadRequestExceptionHandler("Este email ja exite tento outro");
-        }
+        List<ProjetoEntity> projetoEntities = buscarProjetosPorIds(dto.getIdProjeto());
 
-        List<ProjetoEntity> projetoEntities = projetoRepository.findAllById(dto.idProjeto);
-
-        if (projetoEntities.isEmpty()){
-            throw new ResouceExceptionHandler("Nao existe nenhum projeto com este id");
-        }
 
         FuncionarioEntity funcionario = new FuncionarioEntity();
         funcionario.setNome(dto.nome);
         funcionario.setEmail(dto.email);
         funcionario.setSenha(dto.senha);
+        funcionario.setIdade(dto.idade);
         funcionario.setDepartamento(departamento);
         funcionario.getProjetos().addAll(projetoEntities);
 
         funcionariosRepository.save(funcionario);
     }
 
+
+    public void validarEmail(String email){
+        if (funcionariosRepository.existsByEmail(email)) {
+            throw new BadRequestExceptionHandler("Email ja existente");
+        }
+    }
+
+    public List<ProjetoEntity> buscarProjetosPorIds(List<Long> ids) {
+        List<ProjetoEntity> projetoEntities = projetoRepository.findAllById(ids);
+        if (projetoEntities.isEmpty()){
+            throw new ResouceExceptionHandler("Nao existe nenhum projeto com este id");
+        }
+        return projetoEntities;
+     }
 
     public List<FuncionariosResponseDto> findAllFuncionarios(){
         List<FuncionarioEntity> funcionarios = funcionariosRepository.findAll();
@@ -70,7 +77,7 @@ public class FuncionariosService {
         List<ProjetoResponseDto> projetoResponseDtos = f.getProjetos().stream()
                 .map(projeto -> new ProjetoResponseDto(projeto.getId(), projeto.getData(), projeto.getNome(), projeto.getDescricao()))
                 .toList();
-        return new FuncionariosResponseDto(f.getId(), f.getDataCriacao(), f.getNome(), f.getEmail(), f.getDepartamento().getId(), f.getDepartamento().getNome(), f.getEndereco(), projetoResponseDtos);
+        return new FuncionariosResponseDto(f.getId(), f.getDataCriacao(), f.getNome(), f.getIdade(),f.getEmail(), f.getDepartamento().getId(), f.getDepartamento().getNome(), f.getEndereco(),projetoResponseDtos);
     }
 
 

@@ -27,6 +27,8 @@ public class FuncionariosResponseDto {
 
     public String nome;
 
+    public Long idade;
+
     public String email;
 
     public Long idDepartamento;
@@ -43,6 +45,7 @@ public class FuncionariosResponseDto {
         this.id = f.getId();
         this.dataCriacao = f.getDataCriacao();
         this.nome = f.getNome();
+        this.idade = f.getIdade();
         this.email = f.getEmail();
         this.idDepartamento = f.getDepartamento().getId();
         this.nomeDepartamento = f.getDepartamento().getNome();

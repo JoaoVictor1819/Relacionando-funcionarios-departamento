@@ -37,6 +37,8 @@ public class FuncionarioEntity {
     @Column(name = "Nome_Funcionario")
     public String nome;
 
+    public Long idade;
+
     @Column(name = "Email_Funcionario", unique = true)
     public String email;
 
@@ -63,6 +65,7 @@ public class FuncionarioEntity {
 
     public FuncionarioEntity(FuncionariosRequestDto dto) {
         this.nome = dto.nome;
+        this.idade = dto.idade;
         this.email = dto.email;
         this.senha = dto.senha;
     }

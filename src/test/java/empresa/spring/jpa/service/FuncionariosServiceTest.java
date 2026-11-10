@@ -30,6 +30,7 @@ class FuncionariosServiceTest {
         FuncionarioEntity funcionario = new FuncionarioEntity(
                 FuncionariosRequestDto.builder()
                         .nome("Victor")
+                        .idade(20L)
                         .email("Exemplo@gmail.com")
                         .senha("senha123")
                         .build());
