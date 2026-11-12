@@ -3,7 +3,7 @@ package empresa.spring.jpa.controller;
 
 import empresa.spring.jpa.dto.projetoDto.ProjetoRequesteDto;
 import empresa.spring.jpa.dto.projetoDto.ProjetoResponseDto;
-import empresa.spring.jpa.entity.projection.ProjetosResumoProjection;
+import empresa.spring.jpa.entity.ProjetosResumoProjection;
 import empresa.spring.jpa.entity.projetos.ProjetoEntity;
 import empresa.spring.jpa.service.ProjetoService;
 import io.swagger.v3.oas.annotations.Operation;

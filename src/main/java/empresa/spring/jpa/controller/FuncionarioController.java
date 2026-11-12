@@ -2,7 +2,7 @@ package empresa.spring.jpa.controller;
 
 import empresa.spring.jpa.dto.funcionariosDto.FuncionariosRequestDto;
 import empresa.spring.jpa.dto.funcionariosDto.FuncionariosResponseDto;
-import empresa.spring.jpa.entity.projection.FuncionarioResumoProjection;
+import empresa.spring.jpa.entity.FuncionarioResumoProjection;
 import empresa.spring.jpa.service.FuncionariosService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;

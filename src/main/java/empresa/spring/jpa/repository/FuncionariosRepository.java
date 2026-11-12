@@ -1,6 +1,7 @@
 package empresa.spring.jpa.repository;
 
-import empresa.spring.jpa.entity.projection.FuncionarioResumoProjection;
+import empresa.spring.jpa.entity.FuncionarioResumoProjection;
+import empresa.spring.jpa.entity.endereco.EnderecoEntity;
 import empresa.spring.jpa.entity.funcionarios.FuncionarioEntity;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

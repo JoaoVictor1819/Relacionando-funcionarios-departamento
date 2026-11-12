@@ -1,4 +1,4 @@
-package empresa.spring.jpa.entity.projection;
+package empresa.spring.jpa.entity;
 
 public interface FuncionarioResumoProjection {
 
