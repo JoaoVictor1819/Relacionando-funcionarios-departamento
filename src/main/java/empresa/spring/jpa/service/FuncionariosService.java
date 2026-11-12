@@ -35,8 +35,6 @@ public class FuncionariosService {
 
         validarEmail(dto.getEmail());
 
-        List<ProjetoEntity> projetoEntities = buscarProjetosPorIds(dto.getIdProjeto());
-
 
         FuncionarioEntity funcionario = new FuncionarioEntity();
         funcionario.setNome(dto.nome);
@@ -44,8 +42,6 @@ public class FuncionariosService {
         funcionario.setSenha(dto.senha);
         funcionario.setIdade(dto.idade);
         funcionario.setDepartamento(departamento);
-        funcionario.getProjetos().addAll(projetoEntities);
-
         funcionariosRepository.save(funcionario);
     }
 
@@ -55,14 +51,6 @@ public class FuncionariosService {
             throw new BadRequestExceptionHandler("Email ja existente");
         }
     }
-
-    public List<ProjetoEntity> buscarProjetosPorIds(List<Long> ids) {
-        List<ProjetoEntity> projetoEntities = projetoRepository.findAllById(ids);
-        if (projetoEntities.isEmpty()){
-            throw new ResouceExceptionHandler("Nao existe nenhum projeto com este id");
-        }
-        return projetoEntities;
-     }
 
     public List<FuncionariosResponseDto> findAllFuncionarios(){
         List<FuncionarioEntity> funcionarios = funcionariosRepository.findAll();
@@ -74,10 +62,7 @@ public class FuncionariosService {
     }
 
     private FuncionariosResponseDto toResponse(FuncionarioEntity f){
-        List<ProjetoResponseDto> projetoResponseDtos = f.getProjetos().stream()
-                .map(projeto -> new ProjetoResponseDto(projeto.getId(), projeto.getData(), projeto.getNome(), projeto.getDescricao()))
-                .toList();
-        return new FuncionariosResponseDto(f.getId(), f.getDataCriacao(), f.getNome(), f.getIdade(),f.getEmail(), f.getDepartamento().getId(), f.getDepartamento().getNome(), f.getEndereco(),projetoResponseDtos);
+        return new FuncionariosResponseDto(f.getId(), f.getDataCriacao(), f.getNome(), f.getIdade(),f.getEmail(), f.getDepartamento().getId(), f.getDepartamento().getNome(), f.getEndereco());
     }
 
 

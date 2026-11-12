@@ -20,7 +20,7 @@ public class ProjetoRequesteDto {
     @NotBlank(message = "Descreva como funciona o projeto criado")
     public String descricao;
 
-
+    public List<Long> idFuncionario;
 
 
 }

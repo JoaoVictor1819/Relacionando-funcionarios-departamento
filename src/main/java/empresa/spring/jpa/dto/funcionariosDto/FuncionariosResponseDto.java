@@ -37,7 +37,6 @@ public class FuncionariosResponseDto {
 
     public EnderecoEntity endereco;
 
-    public List<ProjetoResponseDto> projeto;
 
 
 
@@ -54,6 +53,6 @@ public class FuncionariosResponseDto {
     }
 
 
-    public FuncionariosResponseDto(Long id, Date dataCriacao, String nome, String email, Long id1, String nome1, EnderecoEntity endereco, Set<ProjetoEntity> projetos) {
+    public FuncionariosResponseDto(Long id, Date dataCriacao, String nome, String email, Long id1, String nome1, EnderecoEntity endereco) {
     }
 }

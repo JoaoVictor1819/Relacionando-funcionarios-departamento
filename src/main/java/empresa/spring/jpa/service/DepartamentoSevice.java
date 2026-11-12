@@ -55,8 +55,7 @@ public class DepartamentoSevice {
                        f.getEmail(),
                        f.getDepartamento().getId(),
                        f.getDepartamento().getNome(),
-                       f.getEndereco(),
-                       f.getProjetos()))
+                       f.getEndereco()))
                .toList();
 
        return new DepartamentoResponseDto(departamentoEntity.getId(),
@@ -84,7 +83,7 @@ public class DepartamentoSevice {
                 .orElseThrow(() -> new BadRequestExceptionHandler("Departamento não encontrado"));
 
         List<FuncionariosResponseDto> funcionariosResponseDto = departamento.getFuncionarios().stream()
-                .map(f -> new FuncionariosResponseDto(f.getId(),f.getDataCriacao(),f.getNome(),f.getEmail(),f.getDepartamento().getId(), f.getDepartamento().getNome(), f.getEndereco(), f.getProjetos()))
+                .map(f -> new FuncionariosResponseDto(f.getId(),f.getDataCriacao(),f.getNome(),f.getEmail(),f.getDepartamento().getId(), f.getDepartamento().getNome(), f.getEndereco()))
                 .toList();
 
         return new DepartamentoResponseDto(departamento.getId(),

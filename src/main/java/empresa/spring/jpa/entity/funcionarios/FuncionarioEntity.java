@@ -56,12 +56,8 @@ public class FuncionarioEntity {
 
 
     @ManyToMany
-    @JoinTable(
-            name = "Funcionarios_Projetos",
-            joinColumns = @JoinColumn(name = "funcionario_id"),
-            inverseJoinColumns = @JoinColumn(name = "projetos_id")
-    )
-    public Set<ProjetoEntity> projetos = new HashSet<>();
+    @JoinColumn(name = "funcionario")
+    public Set<ProjetoEntity> projeto = new HashSet<>();
 
     public FuncionarioEntity(FuncionariosRequestDto dto) {
         this.nome = dto.nome;

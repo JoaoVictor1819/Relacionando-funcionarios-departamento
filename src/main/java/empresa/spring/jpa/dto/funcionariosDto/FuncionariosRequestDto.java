@@ -38,7 +38,7 @@ public class FuncionariosRequestDto {
     @NotNull(message = "Escolha o departamento que voce fara parte!")
     public Long idDepartamento;
 
-    public List<Long> idProjeto;
+
 
 
 }

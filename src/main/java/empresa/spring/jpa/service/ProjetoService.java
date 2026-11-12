@@ -30,11 +30,23 @@ public class ProjetoService {
     public ProjetoEntity saveProjeto(ProjetoRequesteDto dto){
 
 
+        List<FuncionarioEntity> funcionario = getFuncionarios(dto.getIdFuncionario());
+
         var projetos = new ProjetoEntity();
-       projetos.setNome(dto.getNome());
-       projetos.setDescricao(dto.getDescricao());
+        projetos.setNome(dto.getNome());
+        projetos.setDescricao(dto.getDescricao());
+        projetos.getFuncionario().addAll(funcionario);
 
        return projetoRepository.save(projetos);
+    }
+
+
+    public List<FuncionarioEntity> getFuncionarios(List<Long> ids){
+        List<FuncionarioEntity> funcionario = funcionariosRepository.findAllById(ids);
+        if (funcionario.isEmpty()){
+            throw new ResouceExceptionHandler("Nao existe nenhum funcionario com este id");
+        }
+        return funcionario;
     }
 
     public List<ProjetoResponseDto> getProjetoAll(){
@@ -46,9 +58,12 @@ public class ProjetoService {
                 .toList();
     }
 
-    private  ProjetoResponseDto toResponse(ProjetoEntity p){
+    private ProjetoResponseDto toResponse(ProjetoEntity p){
+        List<FuncionariosResponseDto> funcionariosResponseDto = p.getFuncionario().stream()
+                .map(f -> new FuncionariosResponseDto(f.getId(), f.getDataCriacao(), f.getNome(), f.getIdade(), f.getEmail(), f.getDepartamento().getId(), f.getDepartamento().getNome(), f.getEndereco()))
+                .toList();
 
-        return new ProjetoResponseDto(p.getId(), p.getData(), p.getNome(), p.getDescricao());
+        return new ProjetoResponseDto(p.getId(), p.getData(), p.getNome(), p.getDescricao(), funcionariosResponseDto);
     }
 
     @Transactional
@@ -56,7 +71,7 @@ public class ProjetoService {
         ProjetoEntity projetoEntity = projetoRepository.findById(id)
                 .orElseThrow(() -> new ResouceExceptionHandler("Este id nao existe entao nao foi possivel deletar o projeto"));
 
-        if (projetoEntity.getFuncionarios() != null) {
+        if (projetoEntity.getFuncionario() != null) {
             throw new ResouceExceptionHandler("Nao existe projeto com este id");
         }
 

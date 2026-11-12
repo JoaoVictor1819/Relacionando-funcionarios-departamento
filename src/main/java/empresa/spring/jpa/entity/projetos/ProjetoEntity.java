@@ -32,6 +32,11 @@ public class ProjetoEntity {
     @Column(name = "Descricao_Projeto",nullable = false)
     public String descricao;
 
-    @ManyToMany(mappedBy = "projetos")
-    public Set<FuncionarioEntity> funcionarios = new HashSet<>();
+    @ManyToMany
+    @JoinTable(
+            name = "Projetos_Funcionarios",
+            joinColumns = @JoinColumn(name = "projeto_id"),
+            inverseJoinColumns = @JoinColumn(name = "funcionario_id")
+    )
+    public Set<FuncionarioEntity> funcionario = new HashSet<>();
 }
