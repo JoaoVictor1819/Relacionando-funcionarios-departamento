@@ -1,12 +1,14 @@
 package empresa.spring.jpa.repository;
 
 import empresa.spring.jpa.dto.projetoDto.ProjetoResponseDto;
-import empresa.spring.jpa.entity.ProjetosResumoProjection;
+import empresa.spring.jpa.entity.projection.ProjetosResumoProjection;
 import empresa.spring.jpa.entity.projetos.ProjetoEntity;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.NativeQuery;
+
+import java.util.List;
 
 public interface ProjetoRepository extends JpaRepository<ProjetoEntity, Long> {
 
@@ -22,4 +24,6 @@ public interface ProjetoRepository extends JpaRepository<ProjetoEntity, Long> {
             countQuery = "SELECT COUNT(*) FROM Projetos"
     )
     Page<ProjetosResumoProjection> getAllProjetePageable(Pageable pageable);
+
+    List<ProjetoEntity> findAllById(List<ProjetoResponseDto> ids)   ;
 }

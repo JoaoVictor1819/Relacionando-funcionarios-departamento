@@ -1,4 +1,4 @@
-package empresa.spring.jpa.entity;
+package empresa.spring.jpa.entity.projection;
 
 import java.util.Date;
 
