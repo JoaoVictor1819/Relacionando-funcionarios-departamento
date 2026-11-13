@@ -25,8 +25,7 @@ import java.util.List;
 public class FuncionariosService {
 
     private final FuncionariosRepository funcionariosRepository;
-    private  final DepartamentoRepository departamentoRepository;
-    private final ProjetoRepository projetoRepository;
+    private final DepartamentoRepository departamentoRepository;
 
     @Transactional
     public void saveFuncionario(FuncionariosRequestDto dto){
@@ -35,14 +34,13 @@ public class FuncionariosService {
 
         validarEmail(dto.getEmail());
 
-
-        FuncionarioEntity funcionario = new FuncionarioEntity();
-        funcionario.setNome(dto.nome);
-        funcionario.setEmail(dto.email);
-        funcionario.setSenha(dto.senha);
-        funcionario.setIdade(dto.idade);
-        funcionario.setDepartamento(departamento);
-        funcionariosRepository.save(funcionario);
+         funcionariosRepository.save(FuncionarioEntity.builder()
+                .nome(dto.getNome())
+                .idade(dto.getIdade())
+                .email(dto.getEmail())
+                .senha(dto.getSenha())
+                .departamento(departamento)
+                .build());
     }
 
 

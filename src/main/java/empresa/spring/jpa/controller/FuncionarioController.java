@@ -3,6 +3,7 @@ package empresa.spring.jpa.controller;
 import empresa.spring.jpa.dto.funcionariosDto.FuncionariosRequestDto;
 import empresa.spring.jpa.dto.funcionariosDto.FuncionariosResponseDto;
 import empresa.spring.jpa.entity.FuncionarioResumoProjection;
+import empresa.spring.jpa.entity.funcionarios.FuncionarioEntity;
 import empresa.spring.jpa.service.FuncionariosService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -25,9 +26,10 @@ public class FuncionarioController {
 
 
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     @Operation(summary = "Criar Funcionario", description = "Metodo responsavel pela criacao de funcionarios")
-    public ResponseEntity saveFuncionario(@Valid @RequestBody FuncionariosRequestDto funcionario){
-        funcionariosService.saveFuncionario(funcionario);
+    public ResponseEntity saveFuncionario(@Valid @RequestBody FuncionariosRequestDto funcionarioDto){
+        funcionariosService.saveFuncionario(funcionarioDto);
         return ResponseEntity.status(HttpStatus.CREATED).body("Funcionario criado com sucesso");
     }
 

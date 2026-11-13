@@ -53,6 +53,5 @@ public class FuncionariosResponseDto {
     }
 
 
-    public FuncionariosResponseDto(Long id, Date dataCriacao, String nome, String email, Long id1, String nome1, EnderecoEntity endereco) {
-    }
+    
 }

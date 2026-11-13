@@ -55,8 +55,7 @@ public class FuncionarioEntity {
     public DepartamentoEntity departamento;
 
 
-    @ManyToMany
-    @JoinColumn(name = "funcionario")
+    @ManyToMany(mappedBy = "funcionario",fetch = FetchType.LAZY)
     public Set<ProjetoEntity> projeto = new HashSet<>();
 
     public FuncionarioEntity(FuncionariosRequestDto dto) {

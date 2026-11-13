@@ -28,7 +28,7 @@ public class FuncionariosRequestDto {
     @NotNull(message = "O email e um campo obrigatorio")
     public String email;
 
-    @NotBlank(message = "A idade e um campo obrigatorio para validar seu cadastro")
+    @NotNull(message = "A idade e um campo obrigatorio para validar seu cadastro")
     @Min(value = 18, message = "A idade minima para cadastro e de 18 anos")
     public Long idade;
 

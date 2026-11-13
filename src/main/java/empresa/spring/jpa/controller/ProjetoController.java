@@ -28,9 +28,9 @@ public class ProjetoController {
 
     @PostMapping
     @Operation(summary = "Criar Projeto", description = "Metodo responsavel pela criacao de projetos")
-    public ResponseEntity<ProjetoEntity> saveProjeto(@Valid @RequestBody ProjetoRequesteDto dto){
-        ProjetoEntity projetoEntity = projetoService.saveProjeto(dto);
-        return ResponseEntity.status(HttpStatus.CREATED).body(projetoEntity);
+    public ResponseEntity saveProjeto(@Valid @RequestBody ProjetoRequesteDto dto){
+        projetoService.saveProjeto(dto);
+        return ResponseEntity.status(HttpStatus.CREATED).body("Projeto criado com sucesso");
     }
 
     @GetMapping

@@ -27,7 +27,7 @@ public class ProjetoService {
     private final FuncionariosRepository funcionariosRepository;
 
     @Transactional
-    public ProjetoEntity saveProjeto(ProjetoRequesteDto dto){
+    public void saveProjeto(ProjetoRequesteDto dto){
 
 
         List<FuncionarioEntity> funcionario = getFuncionarios(dto.getIdFuncionario());
@@ -37,7 +37,7 @@ public class ProjetoService {
         projetos.setDescricao(dto.getDescricao());
         projetos.getFuncionario().addAll(funcionario);
 
-       return projetoRepository.save(projetos);
+        projetoRepository.save(projetos);
     }
 
 
