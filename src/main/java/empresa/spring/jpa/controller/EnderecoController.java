@@ -24,10 +24,10 @@ public class EnderecoController {
 
 
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     @Operation(summary = "Criar Endereco", description = "Metodo responsavel pela criacao de enderecos para funcionarios")
-    public ResponseEntity saveEndereco(@Valid @RequestBody EnderecoRequestDto dto){
+    public void saveEndereco(@Valid @RequestBody EnderecoRequestDto dto){
         enderecoService.saveEndereco(dto);
-        return ResponseEntity.status(HttpStatus.CREATED).body("Endereco Criado para usuario");
     }
 
 
@@ -47,16 +47,16 @@ public class EnderecoController {
 
 
     @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     @Operation(summary = "Deletar Endereco", description = "Metodo responsavel por deletar endereco pelo id")
-    public ResponseEntity deleteEndereco(@PathVariable Long id){
+    public void deleteEndereco(@PathVariable Long id){
         enderecoService.deleteEndereco(id);
-        return ResponseEntity.status(HttpStatus.OK).body("Endereco Deletado para usuario");
     }
 
     @PutMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
     @Operation(summary = "Atualizar Endereco", description = "Metodo responsavel por atualizar endereco pelo id")
-    public ResponseEntity updateEndereco(@PathVariable Long id, @Valid @RequestBody EnderecoRequestDto dto){
+    public void updateEndereco(@PathVariable Long id, @Valid @RequestBody EnderecoRequestDto dto){
         enderecoService.UpdateEndereco(id, dto);
-        return ResponseEntity.status(HttpStatus.OK).body("Endereco Atualizado para usuario");
     }
 }

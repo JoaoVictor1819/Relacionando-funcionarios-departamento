@@ -23,10 +23,10 @@ public class DepartamentoController {
 
 
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     @Operation(summary = "Criar Departamento", description = "Metodo responsavel pela criacao dos departamentos")
-    public ResponseEntity saveDepartamento(@Valid  @RequestBody DepartamentoRequestDto dto){
+    public void saveDepartamento(@Valid  @RequestBody DepartamentoRequestDto dto){
         departamentoSevice.saveDepartamento(dto);
-        return ResponseEntity.status(HttpStatus.CREATED).body("Departamento criado com sucesso");
     }
 
     @GetMapping
@@ -51,10 +51,10 @@ public class DepartamentoController {
     }
 
     @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     @Operation(summary = "Deletar Departamento", description = "Metodo responsavel por deletar departamento pelo id")
-    public ResponseEntity deleteDepartamento(@PathVariable Long id){
+    public void deleteDepartamento(@PathVariable Long id) {
         departamentoSevice.delete(id);
-        return ResponseEntity.status(HttpStatus.OK).body("Departamento deletado com sucesso");
     }
 
     @PutMapping("/{id}")
