@@ -4,7 +4,6 @@ package empresa.spring.jpa.controller;
 import empresa.spring.jpa.dto.projetoDto.ProjetoRequesteDto;
 import empresa.spring.jpa.dto.projetoDto.ProjetoResponseDto;
 import empresa.spring.jpa.entity.ProjetosResumoProjection;
-import empresa.spring.jpa.entity.projetos.ProjetoEntity;
 import empresa.spring.jpa.service.ProjetoService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -27,10 +26,10 @@ public class ProjetoController {
 
 
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     @Operation(summary = "Criar Projeto", description = "Metodo responsavel pela criacao de projetos")
-    public ResponseEntity saveProjeto(@Valid @RequestBody ProjetoRequesteDto dto){
+    public void saveProjeto(@Valid @RequestBody ProjetoRequesteDto dto){
         projetoService.saveProjeto(dto);
-        return ResponseEntity.status(HttpStatus.CREATED).body("Projeto criado com sucesso");
     }
 
     @GetMapping
@@ -48,10 +47,10 @@ public class ProjetoController {
     }
 
     @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     @Operation(summary = "Deletar Projeto", description = "Metodo responsavel por deletar projeto pelo id")
-    public ResponseEntity deleteProjet(@PathVariable Long id){
+    public void deleteProjet(@PathVariable Long id){
         projetoService.deleteProjeto(id);
-        return  ResponseEntity.status(HttpStatus.NO_CONTENT).body("Projeto deletado com sucesso!");
     }
 
     @PutMapping("/{id}")

@@ -28,9 +28,8 @@ public class FuncionarioController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     @Operation(summary = "Criar Funcionario", description = "Metodo responsavel pela criacao de funcionarios")
-    public ResponseEntity saveFuncionario(@Valid @RequestBody FuncionariosRequestDto funcionarioDto){
+    public void saveFuncionario(@Valid @RequestBody FuncionariosRequestDto funcionarioDto){
         funcionariosService.saveFuncionario(funcionarioDto);
-        return ResponseEntity.status(HttpStatus.CREATED).body("Funcionario criado com sucesso");
     }
 
 
@@ -63,9 +62,9 @@ public class FuncionarioController {
     }
 
     @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     @Operation(summary = "Deletar Funcionario", description = "Metodo responsavel por deletar funcionario pelo id")
-    public ResponseEntity deleteFuncionario(@PathVariable Long id){
+    public void deleteFuncionario(@PathVariable Long id){
         funcionariosService.delete(id);
-        return ResponseEntity.status(HttpStatus.OK).body("Funcionario deletado com sucesso");
     }
 }
