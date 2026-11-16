@@ -2,9 +2,6 @@ package empresa.spring.jpa.dto.departamentoDto;
 
 
 import empresa.spring.jpa.dto.funcionariosDto.FuncionariosResponseDto;
-import empresa.spring.jpa.dto.projetoDto.ProjetoResponseDto;
-import empresa.spring.jpa.entity.funcionarios.FuncionarioEntity;
-import jakarta.persistence.Column;
 import lombok.*;
 
 import java.math.BigDecimal;

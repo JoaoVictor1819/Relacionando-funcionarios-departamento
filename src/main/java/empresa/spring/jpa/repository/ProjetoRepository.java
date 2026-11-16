@@ -1,6 +1,5 @@
 package empresa.spring.jpa.repository;
 
-import empresa.spring.jpa.dto.projetoDto.ProjetoResponseDto;
 import empresa.spring.jpa.entity.ProjetosResumoProjection;
 import empresa.spring.jpa.entity.projetos.ProjetoEntity;
 import org.springframework.data.domain.Page;

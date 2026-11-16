@@ -1,18 +1,11 @@
 package empresa.spring.jpa.dto.funcionariosDto;
 
 
-import empresa.spring.jpa.dto.enderecoDto.EnderecoResponseDto;
-import empresa.spring.jpa.dto.projetoDto.ProjetoResponseDto;
 import empresa.spring.jpa.entity.endereco.EnderecoEntity;
 import empresa.spring.jpa.entity.funcionarios.FuncionarioEntity;
-import empresa.spring.jpa.entity.projetos.ProjetoEntity;
 import lombok.*;
 
 import java.time.LocalDateTime;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
 
 @Getter
 @Setter

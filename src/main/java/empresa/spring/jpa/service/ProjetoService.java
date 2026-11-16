@@ -6,7 +6,6 @@ import empresa.spring.jpa.dto.projetoDto.ProjetoResponseDto;
 import empresa.spring.jpa.entity.ProjetosResumoProjection;
 import empresa.spring.jpa.entity.funcionarios.FuncionarioEntity;
 import empresa.spring.jpa.entity.projetos.ProjetoEntity;
-import empresa.spring.jpa.exception.BadRequestExceptionHandler;
 import empresa.spring.jpa.exception.ResouceExceptionHandler;
 import empresa.spring.jpa.repository.FuncionariosRepository;
 import empresa.spring.jpa.repository.ProjetoRepository;
@@ -14,7 +13,6 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
