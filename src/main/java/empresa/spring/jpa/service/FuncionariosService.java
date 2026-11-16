@@ -80,12 +80,13 @@ public class FuncionariosService {
     }
 
 
-    public void delete(Long id){
+    @Transactional
+    public void deleteFuncionarios(Long id){
         funcionariosRepository.deleteById(id);
     }
 
     @Transactional
-    public FuncionariosResponseDto update(Long id, FuncionariosRequestDto dto) {
+    public FuncionariosResponseDto updateFuncionario(Long id, FuncionariosRequestDto dto) {
         FuncionarioEntity funcionario = funcionariosRepository.findById(id)
                 .orElseThrow(() -> new BadRequestExceptionHandler("Este id de funcionario nao existe"));
 

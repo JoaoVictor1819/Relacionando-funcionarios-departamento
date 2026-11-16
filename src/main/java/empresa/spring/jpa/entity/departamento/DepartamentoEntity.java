@@ -34,7 +34,6 @@ public class DepartamentoEntity {
     public String descricao;
 
 
-
     @OneToMany(mappedBy = "departamento", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     public Set<FuncionarioEntity> funcionarios = new HashSet<>();
 
