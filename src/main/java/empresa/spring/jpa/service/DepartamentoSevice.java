@@ -49,7 +49,7 @@ public class DepartamentoSevice {
 
     private DepartamentoResponseDto toResponse(DepartamentoEntity departamentoEntity){
       List<FuncionariosResponseDto> funcionariosResponseDtos = departamentoEntity.getFuncionarios().stream()
-              .map(f -> new FuncionariosResponseDto(f.getId(),f.getDataCriacao(),f.getNome(),f.getIdade(),f.getEmail(),f.getDepartamento().getId(),f.getDepartamento().getNome(),f.getEndereco()))
+              .map(f -> new FuncionariosResponseDto(f.getId(),f.getDataCriacaoFuncionario(),f.getNome(),f.getIdade(),f.getEmail(),f.getDepartamento().getId(),f.getDepartamento().getNome(),f.getEndereco()))
               .toList();
 
        return new DepartamentoResponseDto(departamentoEntity.getId(),
@@ -77,7 +77,7 @@ public class DepartamentoSevice {
                 .orElseThrow(() -> new BadRequestExceptionHandler("Departamento não encontrado"));
 
         List<FuncionariosResponseDto> funcionariosResponseDto = departamento.getFuncionarios().stream()
-                .map(f -> new FuncionariosResponseDto(f.getId(),f.getDataCriacao(),f.getNome(),f.getIdade(),f.getEmail(),f.getDepartamento().getId(), f.getDepartamento().getNome(), f.getEndereco()))
+                .map(f -> new FuncionariosResponseDto(f.getId(),f.getDataCriacaoFuncionario(),f.getNome(),f.getIdade(),f.getEmail(),f.getDepartamento().getId(), f.getDepartamento().getNome(), f.getEndereco()))
                 .toList();
 
         return new DepartamentoResponseDto(departamento.getId(),

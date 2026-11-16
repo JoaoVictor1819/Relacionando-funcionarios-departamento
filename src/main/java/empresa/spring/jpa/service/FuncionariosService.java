@@ -60,7 +60,7 @@ public class FuncionariosService {
     }
 
     private FuncionariosResponseDto toResponse(FuncionarioEntity f){
-        return new FuncionariosResponseDto(f.getId(), f.getDataCriacao(), f.getNome(), f.getIdade(),f.getEmail(), f.getDepartamento().getId(), f.getDepartamento().getNome(), f.getEndereco());
+        return new FuncionariosResponseDto(f.getId(), f.getDataCriacaoFuncionario(), f.getNome(), f.getIdade(),f.getEmail(), f.getDepartamento().getId(), f.getDepartamento().getNome(), f.getEndereco());
     }
 
 
@@ -77,6 +77,13 @@ public class FuncionariosService {
         return funcionarioEntities.stream()
                 .map(this::toResponse)
                 .toList();
+    }
+
+    public FuncionariosResponseDto findByIdFuncionarios(Long id){
+        FuncionarioEntity funcionario = funcionariosRepository.findById(id)
+                .orElseThrow(() -> new ResouceExceptionHandler("Funcionario nao encontrado"));
+
+        return toResponse(funcionario);
     }
 
 

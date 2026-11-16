@@ -60,7 +60,7 @@ public class ProjetoService {
 
     private ProjetoResponseDto toResponse(ProjetoEntity p){
         List<FuncionariosResponseDto> funcionariosResponseDto = p.getFuncionario().stream()
-                .map(f -> new FuncionariosResponseDto(f.getId(), f.getDataCriacao(), f.getNome(), f.getIdade(), f.getEmail(), f.getDepartamento().getId(), f.getDepartamento().getNome(), f.getEndereco()))
+                .map(f -> new FuncionariosResponseDto(f.getId(), f.getDataCriacaoFuncionario(), f.getNome(), f.getIdade(), f.getEmail(), f.getDepartamento().getId(), f.getDepartamento().getNome(), f.getEndereco()))
                 .toList();
 
         return new ProjetoResponseDto(p.getId(), p.getData(), p.getNome(), p.getDescricao(), funcionariosResponseDto);

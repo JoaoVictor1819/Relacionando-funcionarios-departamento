@@ -8,6 +8,7 @@ import empresa.spring.jpa.entity.funcionarios.FuncionarioEntity;
 import empresa.spring.jpa.entity.projetos.ProjetoEntity;
 import lombok.*;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -23,7 +24,7 @@ public class FuncionariosResponseDto {
 
     public Long id;
 
-    public Date dataCriacao = new Date();
+    public LocalDateTime dataCriacao;
 
     public String nome;
 
@@ -42,7 +43,7 @@ public class FuncionariosResponseDto {
 
     public FuncionariosResponseDto(FuncionarioEntity f) {
         this.id = f.getId();
-        this.dataCriacao = f.getDataCriacao();
+        this.dataCriacao = f.getDataCriacaoFuncionario();
         this.nome = f.getNome();
         this.idade = f.getIdade();
         this.email = f.getEmail();

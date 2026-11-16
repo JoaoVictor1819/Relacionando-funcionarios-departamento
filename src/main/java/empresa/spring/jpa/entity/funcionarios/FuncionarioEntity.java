@@ -11,7 +11,9 @@ import empresa.spring.jpa.entity.projetos.ProjetoEntity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
 
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.HashSet;
@@ -32,7 +34,8 @@ public class FuncionarioEntity {
     public Long id;
 
     @Column(name = "Data_Criacao_Funcionario")
-    public Date dataCriacao = new Date();
+    @CreationTimestamp
+    public LocalDateTime dataCriacaoFuncionario = LocalDateTime.now();
 
     @Column(name = "Nome_Funcionario")
     public String nome;

@@ -53,10 +53,16 @@ public class FuncionarioController {
         return ResponseEntity.status(HttpStatus.OK).body(funcionarioResumoProjections);
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<FuncionariosResponseDto> findFuncionarioByIdd(@PathVariable Long id){
+        FuncionariosResponseDto funcionario = funcionariosService.findByIdFuncionarios(id);
+        return ResponseEntity.status(HttpStatus.OK).body(funcionario);
+    }
+
     @PutMapping("/{id}")
     @Operation(summary = "Atualizar Funcionario", description = "Metodo responsavel por atualizar funcionario pelo id")
     public ResponseEntity<FuncionariosResponseDto> updateFuncionario(@PathVariable Long id, @Valid @RequestBody FuncionariosRequestDto dto){
-        FuncionariosResponseDto funcionario = funcionariosService.update(id, dto);
+        FuncionariosResponseDto funcionario = funcionariosService.updateFuncionario(id, dto);
         return ResponseEntity.status(HttpStatus.OK).body(funcionario);
     }
 
@@ -64,6 +70,6 @@ public class FuncionarioController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @Operation(summary = "Deletar Funcionario", description = "Metodo responsavel por deletar funcionario pelo id")
     public void deleteFuncionario(@PathVariable Long id){
-        funcionariosService.delete(id);
+        funcionariosService.deleteFuncionarios(id);
     }
 }
