@@ -34,7 +34,11 @@ public class EnderecoService {
        }
 
        enderecoEntity = EnderecoEntity.builder()
+               .cep(dto.getCep())
+               .estado(dto.getEstado())
                .cidade(dto.getCidade())
+               .rua(dto.getRua())
+               .numeroCasa(dto.getNumeroCasa())
                .build();
 
        funcionario.setEndereco(enderecoEntity);
