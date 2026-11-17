@@ -9,6 +9,8 @@ import java.util.Optional;
 public interface DepartamentoRepository extends JpaRepository<DepartamentoEntity, Long> {
 
 
+    boolean existsByNome(String nome);
+
     List<DepartamentoEntity> findByNomeContainingIgnoreCase(String name);
 
     Optional<DepartamentoEntity> findByNome(String name);

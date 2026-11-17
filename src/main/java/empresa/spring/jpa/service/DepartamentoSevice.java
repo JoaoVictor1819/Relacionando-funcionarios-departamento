@@ -19,21 +19,22 @@ public class DepartamentoSevice {
 
     private final DepartamentoRepository departamentoRepository;
 
-
-
     public void saveDepartamento(DepartamentoRequestDto dto) {
-        DepartamentoEntity departamento = departamentoRepository.findByNome(dto.getNome())
-                .orElse(null);
 
-        if (departamento != null){
-            throw new BadRequestExceptionHandler("Departamento ja existe");
-        }
+        validarNomeDepartamento(dto.getNome());
 
          departamentoRepository.save(DepartamentoEntity.builder()
                  .nome(dto.getNome())
                  .salarioFixo(dto.getSalarioFixo())
                  .descricao(dto.getDescricao())
                  .build());
+    }
+
+
+    public void validarNomeDepartamento(String nome){
+        if (departamentoRepository.existsByNome(nome)){
+            throw new BadRequestExceptionHandler("Departamento ja existe");
+        }
     }
 
     public List<DepartamentoResponseDto> findAllDepartamento(){
