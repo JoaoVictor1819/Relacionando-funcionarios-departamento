@@ -4,6 +4,7 @@ import empresa.spring.jpa.entity.funcionarios.FuncionarioEntity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -24,7 +25,7 @@ public class ProjetoEntity {
     public Long id;
 
     @Column(name = "Criacao_Projeto_Data")
-    public Date data = new Date();
+    public LocalDateTime dataCriacaoProjeto = LocalDateTime.now();
 
     @Column(name = "Nome_Projeto",nullable = false)
     public String nome;
