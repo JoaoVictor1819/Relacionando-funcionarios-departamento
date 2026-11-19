@@ -27,6 +27,9 @@ public class ProjetoEntity {
     @Column(name = "Criacao_Projeto_Data")
     public LocalDateTime dataCriacaoProjeto = LocalDateTime.now();
 
+    @Column(name = "Prazo_Finalizacao_Projeto", nullable = false)
+    public Date prazoFinalizacao;
+
     @Column(name = "Nome_Projeto",nullable = false)
     public String nome;
 
