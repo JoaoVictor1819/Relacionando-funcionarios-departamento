@@ -4,6 +4,7 @@ package empresa.spring.jpa.dto.projetoDto;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
+import java.util.Date;
 import java.util.List;
 
 @Getter
@@ -21,6 +22,8 @@ public class ProjetoRequesteDto {
     public String descricao;
 
     public List<Long> idFuncionario;
+
+    public Date prazoFinal;
 
 
 }

@@ -33,6 +33,7 @@ public class ProjetoService {
         var projetos = new ProjetoEntity();
         projetos.setNome(dto.getNome());
         projetos.setDescricao(dto.getDescricao());
+        projetos.setPrazoFinalizacao(dto.getPrazoFinal());
         projetos.getFuncionario().addAll(funcionario);
 
         projetoRepository.save(projetos);
@@ -61,7 +62,7 @@ public class ProjetoService {
                 .map(f -> new FuncionariosResponseDto(f.getId(), f.getDataCriacaoFuncionario(), f.getNome(), f.getIdade(), f.getEmail(), f.getDepartamento().getId(), f.getDepartamento().getNome(), f.getEndereco()))
                 .toList();
 
-        return new ProjetoResponseDto(p.getId(), p.getData(), p.getNome(), p.getDescricao(), funcionariosResponseDto);
+        return new ProjetoResponseDto(p.getId(),p.getDataCriacaoProjeto(), p.getNome(), p.getDescricao(), funcionariosResponseDto,p.getPrazoFinalizacao());
     }
 
     @Transactional

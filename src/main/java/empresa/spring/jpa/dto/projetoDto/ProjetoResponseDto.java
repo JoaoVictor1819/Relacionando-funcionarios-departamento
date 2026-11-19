@@ -4,6 +4,7 @@ package empresa.spring.jpa.dto.projetoDto;
 import empresa.spring.jpa.dto.funcionariosDto.FuncionariosResponseDto;
 import lombok.*;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -17,12 +18,14 @@ public class ProjetoResponseDto {
 
     public Long id;
 
-    public Date data = new Date();
+    public LocalDateTime data;
 
     public String nome;
 
     public String descricao;
 
     public List<FuncionariosResponseDto> funcionario;
+
+    public Date prazoFinal;
 
 }
