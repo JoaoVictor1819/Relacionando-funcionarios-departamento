@@ -2,10 +2,12 @@ package empresa.spring.jpa.dto.projetoDto;
 
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 import java.util.Date;
 import java.util.List;
+import java.time.LocalDate;
 
 @Getter
 @Setter
@@ -23,7 +25,8 @@ public class ProjetoRequesteDto {
 
     public List<Long> idFuncionario;
 
-    public Date prazoFinal;
+    @NotNull(message = "O prazo final do projeto e obrigatorio")
+    public LocalDate prazoFinal;
 
 
 }

@@ -1,10 +1,12 @@
 package empresa.spring.jpa.entity.projetos;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import empresa.spring.jpa.entity.funcionarios.FuncionarioEntity;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -28,7 +30,8 @@ public class ProjetoEntity {
     public LocalDateTime dataCriacaoProjeto = LocalDateTime.now();
 
     @Column(name = "Prazo_Finalizacao_Projeto", nullable = false)
-    public Date prazoFinalizacao;
+    @JsonFormat(pattern = "dd/MM/yyyy")
+    public LocalDate prazoFinalizacao;
 
     @Column(name = "Nome_Projeto",nullable = false)
     public String nome;
