@@ -34,6 +34,7 @@ public class FuncionarioEntity {
     @Column(name = "Nome_Funcionario")
     public String nome;
 
+    @Column(name = "Idade_Funcionario")
     public Long idade;
 
     @Column(name = "Email_Funcionario", unique = true)

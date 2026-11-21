@@ -24,7 +24,7 @@ public class DepartamentoEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long id;
 
-    @Column(name = "Nome_Departamento",length = 100)
+    @Column(name = "Nome_Departamento",length = 100, unique = true)
     public  String nome;
 
     @Column(name = "Salario_Departamento")

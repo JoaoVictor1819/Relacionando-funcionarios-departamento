@@ -6,6 +6,7 @@ import empresa.spring.jpa.exception.ResouceExceptionHandler;
 import empresa.spring.jpa.exception.RestErroMenssage;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -45,6 +46,16 @@ public class RestGlobalExceptionHandler{
                 .data(new Date())
                 .build();
         return ResponseEntity.status(HttpStatus.NO_CONTENT).body(erroMenssage);
+    }
+
+    @ExceptionHandler(HttpMessageNotReadableException.class)
+    public ResponseEntity<RestErroMenssage> FormatIvalidExceptionHandler(HttpMessageNotReadableException ex){
+        RestErroMenssage restErroMenssage = RestErroMenssage.builder()
+                .menssage("Formato de data inválido!. Formato aceito: dd/MM/yyyy")
+                .status(HttpStatus.BAD_REQUEST)
+                .data(new Date())
+                .build();
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(restErroMenssage);
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)

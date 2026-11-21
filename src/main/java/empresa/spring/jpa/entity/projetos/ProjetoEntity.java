@@ -33,7 +33,7 @@ public class ProjetoEntity {
     @JsonFormat(pattern = "dd/MM/yyyy")
     public LocalDate prazoFinalizacao;
 
-    @Column(name = "Nome_Projeto",nullable = false)
+    @Column(name = "Nome_Projeto",nullable = false, unique = true)
     public String nome;
 
     @Column(name = "Descricao_Projeto",nullable = false)
