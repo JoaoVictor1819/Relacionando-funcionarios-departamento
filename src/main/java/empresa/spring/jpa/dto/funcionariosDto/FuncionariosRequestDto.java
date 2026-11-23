@@ -26,8 +26,7 @@ public class FuncionariosRequestDto {
     public Long idade;
 
     @NotBlank(message = "senha e um campo obrigatorio")
-    @Max(value = 8, message = "A senha nao pode ter mais de 8 caracteres")
-    @Min(value = 4, message = "A senha nao pode ter menos de 4 caracteres")
+    @Size(min = 4, max = 8, message = "A senha deve ter entre 4 e 8 caracteres")
     public String senha;
 
     @NotNull(message = "Escolha o departamento que voce fara parte!")
