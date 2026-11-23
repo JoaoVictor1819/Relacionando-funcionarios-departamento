@@ -25,17 +25,17 @@ public class FuncionariosService {
     private final DepartamentoRepository departamentoRepository;
 
     @Transactional
-    public void saveFuncionario(FuncionariosRequestDto dto){
-        DepartamentoEntity departamento = departamentoRepository.findById(dto.getIdDepartamento())
+    public void saveFuncionario(FuncionariosRequestDto dtoFuncionario) {
+        DepartamentoEntity departamento = departamentoRepository.findById(dtoFuncionario.getIdDepartamento())
                 .orElseThrow(() -> new ResouceExceptionHandler("Departamento não encontrado"));
 
-        validarEmail(dto.getEmail());
+        validarEmail(dtoFuncionario.getEmail());
 
          funcionariosRepository.save(FuncionarioEntity.builder()
-                .nome(dto.getNome())
-                .idade(dto.getIdade())
-                .email(dto.getEmail())
-                .senha(dto.getSenha())
+                .nome(dtoFuncionario.getNome())
+                .idade(dtoFuncionario.getIdade())
+                .email(dtoFuncionario.getEmail())
+                .senha(dtoFuncionario.getSenha())
                 .departamento(departamento)
                 .build());
     }
@@ -90,16 +90,16 @@ public class FuncionariosService {
     }
 
     @Transactional
-    public FuncionariosResponseDto updateFuncionario(Long id, FuncionariosRequestDto dto) {
+    public FuncionariosResponseDto updateFuncionario(Long id, FuncionariosRequestDto dtoFuncionario) {
         FuncionarioEntity funcionario = funcionariosRepository.findById(id)
                 .orElseThrow(() -> new BadRequestExceptionHandler("Este id de funcionario nao existe"));
 
-        DepartamentoEntity departamento = departamentoRepository.findById(dto.getIdDepartamento())
+        DepartamentoEntity departamento = departamentoRepository.findById(dtoFuncionario.getIdDepartamento())
                         .orElseThrow(() -> new BadRequestExceptionHandler("Este departemento nao existe"));
 
-        funcionario.setNome(dto.getNome());
-        funcionario.setEmail(dto.getEmail());
-        funcionario.setSenha(dto.getSenha());
+        funcionario.setNome(dtoFuncionario.getNome());
+        funcionario.setEmail(dtoFuncionario.getEmail());
+        funcionario.setSenha(dtoFuncionario.getSenha());
         funcionario.setDepartamento(departamento);
 
         FuncionarioEntity funcionarioUpdate = funcionariosRepository.save(funcionario);

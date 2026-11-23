@@ -19,14 +19,14 @@ public class DepartamentoSevice {
 
     private final DepartamentoRepository departamentoRepository;
 
-    public void saveDepartamento(DepartamentoRequestDto dto) {
+    public void saveDepartamento(DepartamentoRequestDto dtoDepartamento) {
 
-        validarNomeDepartamento(dto.getNome());
+        validarNomeDepartamento(dtoDepartamento.getNome());
 
          departamentoRepository.save(DepartamentoEntity.builder()
-                 .nome(dto.getNome())
-                 .salarioFixo(dto.getSalarioFixo())
-                 .descricao(dto.getDescricao())
+                 .nome(dtoDepartamento.getNome())
+                 .salarioFixo(dtoDepartamento.getSalarioFixo())
+                 .descricao(dtoDepartamento.getDescricao())
                  .build());
     }
 
@@ -99,13 +99,13 @@ public class DepartamentoSevice {
     }
 
     @Transactional
-    public DepartamentoResponseDto UpdateDepartamento(Long id, DepartamentoRequestDto dto){
+    public DepartamentoResponseDto UpdateDepartamento(Long id, DepartamentoRequestDto dtoDepartamento){
         DepartamentoEntity departamento = departamentoRepository.findById(id)
                 .orElseThrow(() -> new ResouceExceptionHandler("Este id nao faz parte de nenhum departamento existente"));
 
-        departamento.setNome(dto.getNome());
-        departamento.setSalarioFixo(dto.getSalarioFixo());
-        departamento.setDescricao(dto.getDescricao());
+        departamento.setNome(dtoDepartamento.getNome());
+        departamento.setSalarioFixo(dtoDepartamento.getSalarioFixo());
+        departamento.setDescricao(dtoDepartamento.getDescricao());
 
         DepartamentoEntity departamentoUpdate = departamentoRepository.save(departamento);
         return toResponse(departamentoUpdate);

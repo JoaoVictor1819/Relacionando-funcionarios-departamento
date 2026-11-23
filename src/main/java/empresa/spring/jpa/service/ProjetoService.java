@@ -25,15 +25,13 @@ public class ProjetoService {
     private final FuncionariosRepository funcionariosRepository;
 
     @Transactional
-    public void saveProjeto(ProjetoRequesteDto dto){
-
-
-        List<FuncionarioEntity> funcionario = getFuncionarios(dto.getIdFuncionario());
+    public void saveProjeto(ProjetoRequesteDto dtoProjeto){
+        List<FuncionarioEntity> funcionario = getFuncionarios(dtoProjeto.getIdFuncionario());
 
         var projetos = new ProjetoEntity();
-        projetos.setNome(dto.getNome());
-        projetos.setDescricao(dto.getDescricao());
-        projetos.setPrazoFinalizacao(dto.getPrazoFinal());
+        projetos.setNome(dtoProjeto.getNome());
+        projetos.setDescricao(dtoProjeto.getDescricao());
+        projetos.setPrazoFinalizacao(dtoProjeto.getPrazoFinal());
         projetos.getFuncionario().addAll(funcionario);
 
         projetoRepository.save(projetos);
@@ -83,12 +81,12 @@ public class ProjetoService {
 
 
     @Transactional
-    public ProjetoResponseDto update(Long id, ProjetoRequesteDto dto){
+    public ProjetoResponseDto update(Long id, ProjetoRequesteDto dtoProjeto){
         ProjetoEntity projetoEntity = projetoRepository.findById(id)
                 .orElseThrow(() -> new ResouceExceptionHandler("Este id nao existe e nao poderar ser modificado!"));
 
-        projetoEntity.setNome(dto.nome);
-        projetoEntity.setDescricao(dto.descricao);
+        projetoEntity.setNome(dtoProjeto.nome);
+        projetoEntity.setDescricao(dtoProjeto.descricao);
 
 
         ProjetoEntity projetoEntityUpdated = projetoRepository.save(projetoEntity);

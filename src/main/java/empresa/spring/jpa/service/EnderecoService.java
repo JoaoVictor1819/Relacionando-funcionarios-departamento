@@ -23,8 +23,8 @@ public class EnderecoService {
     private final FuncionariosRepository funcionariosRepository;
 
 
-    public void saveEndereco(EnderecoRequestDto dto){
-        FuncionarioEntity funcionario = funcionariosRepository.findById(dto.getIdFuncionario())
+    public void saveEndereco(EnderecoRequestDto dtoEndereco){
+        FuncionarioEntity funcionario = funcionariosRepository.findById(dtoEndereco.getIdFuncionario())
                 .orElseThrow(() -> new BadRequestExceptionHandler("Este id nao existe pode receber este endereco"));
 
 
@@ -34,11 +34,11 @@ public class EnderecoService {
        }
 
        enderecoEntity = EnderecoEntity.builder()
-               .cep(dto.getCep())
-               .estado(dto.getEstado())
-               .cidade(dto.getCidade())
-               .rua(dto.getRua())
-               .numeroCasa(dto.getNumeroCasa())
+               .cep(dtoEndereco.getCep())
+               .estado(dtoEndereco.getEstado())
+               .cidade(dtoEndereco.getCidade())
+               .rua(dtoEndereco.getRua())
+               .numeroCasa(dtoEndereco.getNumeroCasa())
                .build();
 
        funcionario.setEndereco(enderecoEntity);
@@ -80,19 +80,19 @@ public class EnderecoService {
 
 
     @Transactional
-    public void UpdateEndereco(Long id, EnderecoRequestDto dto){
-        FuncionarioEntity funcionario = funcionariosRepository.findById(dto.getIdFuncionario())
+    public void UpdateEndereco(Long id, EnderecoRequestDto dtoEndereco){
+        FuncionarioEntity funcionario = funcionariosRepository.findById(dtoEndereco.getIdFuncionario())
                 .orElseThrow(() -> new ResouceExceptionHandler("Nao existe funcionario com este id"));
 
         enderecoRepository.findById(id)
                 .orElseThrow(() -> new ResouceExceptionHandler("nao existe endereco com este id"));
 
         EnderecoEntity enderecoEntity = EnderecoEntity.builder()
-                .cep(dto.getCep())
-                .estado(dto.getEstado())
-                .cidade(dto.getCidade())
-                .rua(dto.getRua())
-                .numeroCasa(dto.getNumeroCasa())
+                .cep(dtoEndereco.getCep())
+                .estado(dtoEndereco.getEstado())
+                .cidade(dtoEndereco.getCidade())
+                .rua(dtoEndereco.getRua())
+                .numeroCasa(dtoEndereco.getNumeroCasa())
                 .build();
 
         funcionario.setEndereco(enderecoEntity);
