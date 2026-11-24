@@ -1,10 +1,7 @@
 package empresa.spring.jpa.dto.departamentoDto;
 
 
-import jakarta.validation.constraints.DecimalMax;
-import jakarta.validation.constraints.DecimalMin;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.*;
 import lombok.*;
 
 import java.math.BigDecimal;
@@ -26,5 +23,6 @@ public class DepartamentoRequestDto {
     public BigDecimal salarioFixo;
 
     @NotBlank(message = "O campo de descricao e obrigatorio")
+    @Size(min = 20,max = 300, message = "A descricao nao pode ultrapassar 300 caracteres")
     public String descricao;
 }
