@@ -65,7 +65,7 @@
 		</dependency>
 
 
-		<!-- gerar, ler e validar o tokem e pegar seus conteudos-->
+		<!-- gerar, ler e validar o token e pegar seus conteúdos-->
 		<dependency>
 			<groupId>io.jsonwebtoken</groupId>
 			<artifactId>jjwt-api</artifactId>
